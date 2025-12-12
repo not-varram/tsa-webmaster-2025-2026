@@ -1,0 +1,72 @@
+// Add these new models to the end of your schema.prisma file
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  BORROWED
+  RETURNED
+  CANCELLED
+}
+
+model ResourceRequest {
+  id                  String        @id @default(cuid())
+  resourceId          String
+  resource            Resource      @relation(fields: [resourceId], references: [id])
+  requestingChapterId String?
+  requestingChapter   Chapter?      @relation("RequestingChapter", fields: [requestingChapterId], references: [id])
+  owningChapterId     String?
+  owningChapter       Chapter?      @relation("OwningChapter", fields: [owningChapterId], references: [id])
+  requestedById       String
+  requestedBy         User          @relation(fields: [requestedById], references: [id])
+  status              RequestStatus @default(PENDING)
+  borrowDate          DateTime?
+  returnDate          DateTime?
+  actualReturnDate    DateTime?
+  notes               String?       @db.Text
+  adminNotes          String?       @db.Text
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resourceId])
+  @@index([requestingChapterId])
+  @@index([owningChapterId])
+  @@index([status])
+}
+
+model ForumThread {
+  id        String   @id @default(cuid())
+  title     String
+  category  String
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  content   String   @db.Text
+  isPinned  Boolean  @default(false)
+  isLocked  Boolean  @default(false)
+  viewCount Int      @default(0)
+  
+  replies ForumReply[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([authorId])
+  @@index([category])
+  @@index([createdAt])
+}
+
+model ForumReply {
+  id        String      @id @default(cuid())
+  threadId  String
+  thread    ForumThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User        @relation(fields: [authorId], references: [id])
+  content   String      @db.Text
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([threadId])
+  @@index([authorId])
+}

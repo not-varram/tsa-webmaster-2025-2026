@@ -1,0 +1,275 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  PUBLIC
+  STUDENT
+  ADVISOR
+  ADMIN
+}
+
+enum ResourceType {
+  TEMPLATE
+  VIDEO
+  WORKSHOP
+  GUIDE
+  TOOL
+  EVENT
+  SERVICE
+}
+
+enum ResourceOrigin {
+  WTSA
+  CHAPTER
+  EXTERNAL_PARTNER
+}
+
+enum SuggestionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum MentorPairStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  BORROWED
+  RETURNED
+  CANCELLED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique  // Clerk user ID
+  name      String
+  email     String   @unique
+  role      UserRole @default(PUBLIC)
+  chapterId String?
+  chapter   Chapter? @relation(fields: [chapterId], references: [id])
+  verified  Boolean  @default(false)  // For student verification by chapter admins
+  
+  forumThreads     ForumThread[]
+  forumReplies     ForumReply[]
+  resourceRequests ResourceRequest[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([chapterId])
+  @@index([clerkId])
+}
+
+model Chapter {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  schoolName String
+  city      String
+  region    String
+  about     String   @db.Text
+  focusTags String[]
+  latitude  Float?
+  longitude Float?
+  adminEmails String[]  // Emails of chapter admins who can manage this chapter
+  
+  users              User[]
+  resources          Resource[]
+  storyLinks         ChapterStoryLink[]
+  mentorPairs        MentorPair[]       @relation("MentorChapter")
+  menteePairs        MentorPair[]       @relation("MenteeChapter")
+  requestsMade       ResourceRequest[]  @relation("RequestingChapter")
+  requestsReceived   ResourceRequest[]  @relation("OwningChapter")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([region])
+}
+
+model Resource {
+  id          String         @id @default(cuid())
+  slug        String         @unique
+  title       String
+  summary     String
+  description String         @db.Text
+  type        ResourceType
+  audience    String[]
+  category    String
+  tags        String[]
+  origin      ResourceOrigin
+  chapterId   String?
+  chapter     Chapter?       @relation(fields: [chapterId], references: [id])
+  highlighted Boolean        @default(false)
+  url         String?
+  
+  // Physical resource fields
+  isPhysical    Boolean   @default(false)
+  quantity      Int?      // Total quantity available
+  condition     String?   // Good, Fair, Needs Repair, etc.
+  location      String?   // Where it's physically located
+  availableDate DateTime? // When it becomes available
+  
+  requests ResourceRequest[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([type])
+  @@index([highlighted])
+  @@index([chapterId])
+  @@index([isPhysical])
+}
+
+model Suggestion {
+  id           String           @id @default(cuid())
+  resourceName String
+  description  String           @db.Text
+  url          String?
+  audience     String
+  category     String
+  chapterName  String?
+  email        String?
+  status       SuggestionStatus @default(PENDING)
+  
+  createdAt DateTime @default(now())
+
+  @@index([status])
+}
+
+model Event {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  description   String   @db.Text
+  startDatetime DateTime
+  endDatetime   DateTime
+  type          String
+  audience      String[]
+  location      String
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([startDatetime])
+}
+
+model Story {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  excerpt         String
+  body            String   @db.Text
+  featuredImageUrl String?
+  
+  chapterLinks ChapterStoryLink[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+}
+
+model ChapterStoryLink {
+  chapterId String
+  storyId   String
+  chapter   Chapter @relation(fields: [chapterId], references: [id])
+  story     Story   @relation(fields: [storyId], references: [id])
+
+  @@id([chapterId, storyId])
+}
+
+model MentorPair {
+  id               String            @id @default(cuid())
+  mentorChapterId  String
+  menteeChapterId  String
+  status           MentorPairStatus  @default(ACTIVE)
+  notes            String?           @db.Text
+  
+  mentorChapter Chapter @relation("MentorChapter", fields: [mentorChapterId], references: [id])
+  menteeChapter Chapter @relation("MenteeChapter", fields: [menteeChapterId], references: [id])
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([mentorChapterId])
+  @@index([menteeChapterId])
+  @@index([status])
+}
+
+model ResourceRequest {
+  id                  String        @id @default(cuid())
+  resourceId          String
+  resource            Resource      @relation(fields: [resourceId], references: [id])
+  requestingChapterId String?
+  requestingChapter   Chapter?      @relation("RequestingChapter", fields: [requestingChapterId], references: [id])
+  owningChapterId     String?
+  owningChapter       Chapter?      @relation("OwningChapter", fields: [owningChapterId], references: [id])
+  requestedById       String
+  requestedBy         User          @relation(fields: [requestedById], references: [id])
+  status              RequestStatus @default(PENDING)
+  borrowDate          DateTime?
+  returnDate          DateTime?
+  actualReturnDate    DateTime?
+  notes               String?       @db.Text
+  adminNotes          String?       @db.Text
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resourceId])
+  @@index([requestingChapterId])
+  @@index([owningChapterId])
+  @@index([status])
+}
+
+model ForumThread {
+  id        String   @id @default(cuid())
+  title     String
+  category  String
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  content   String   @db.Text
+  isPinned  Boolean  @default(false)
+  isLocked  Boolean  @default(false)
+  viewCount Int      @default(0)
+  
+  replies ForumReply[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([authorId])
+  @@index([category])
+  @@index([createdAt])
+}
+
+model ForumReply {
+  id        String      @id @default(cuid())
+  threadId  String
+  thread    ForumThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User        @relation(fields: [authorId], references: [id])
+  content   String      @db.Text
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([threadId])
+  @@index([authorId])
+}
