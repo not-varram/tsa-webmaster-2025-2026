@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Menu, X, LogOut, User, LayoutDashboard, Clock, ChevronDown } from 'lucide-react'
@@ -72,9 +73,13 @@ export function Header() {
 					{/* Logo */}
 					<div className="flex items-center">
 						<Link href="/" className="flex items-center space-x-2">
-							<div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
-								W
-							</div>
+							<Image
+								src="/site-logo.png"
+								alt="WTSA Hub Logo"
+								width={40}
+								height={40}
+								className="rounded-lg"
+							/>
 							<span className="font-bold text-xl text-neutral-900 hidden sm:inline">
 								WTSA Hub
 							</span>
