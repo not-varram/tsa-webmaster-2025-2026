@@ -31,6 +31,38 @@ export function Header() {
 	const [userMenuOpen, setUserMenuOpen] = useState(false)
 	const [user, setUser] = useState<AuthUser>(null)
 	const [loading, setLoading] = useState(true)
+	const [scrambledText, setScrambledText] = useState('Coalesce')
+
+	// Scramble animation for "Coalesce"
+	useEffect(() => {
+		const targetText = 'Coalesce'
+		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*'
+		let iteration = 0
+		const maxIterations = targetText.length * 3
+
+		const interval = setInterval(() => {
+			setScrambledText(
+				targetText
+					.split('')
+					.map((char, index) => {
+						if (index < iteration / 3) {
+							return targetText[index]
+						}
+						return chars[Math.floor(Math.random() * chars.length)]
+					})
+					.join('')
+			)
+
+			iteration += 1
+
+			if (iteration >= maxIterations) {
+				setScrambledText(targetText)
+				clearInterval(interval)
+			}
+		}, 40)
+
+		return () => clearInterval(interval)
+	}, [])
 
 	useEffect(() => {
 		async function fetchUser() {
@@ -72,30 +104,35 @@ export function Header() {
 				<div className="flex justify-between items-center h-16">
 					{/* Logo */}
 					<div className="flex items-center">
-						<Link href="/" className="flex items-center space-x-2">
+						<Link href="/" className="flex items-center space-x-3">
 							<Image
 								src="/site-logo.png"
-								alt="WTSA Hub Logo"
-								width={40}
-								height={40}
+								alt="WTSA Coalesce Logo"
+								width={48}
+								height={48}
 								className="rounded-lg"
 							/>
-							<span className="font-bold text-xl text-neutral-900 hidden sm:inline">
-								WTSA Hub
+							<span className="hidden sm:flex items-baseline gap-1.5">
+								<span className="font-bold text-2xl text-neutral-900">WTSA</span>
+								<span className="font-coalesce text-2xl italic text-primary-600 font-medium w-[105px]">{scrambledText}</span>
 							</span>
 						</Link>
 					</div>
 
 					{/* Desktop Navigation */}
-					<div className="hidden md:flex items-center space-x-1">
-						{navigation.map((item) => (
-							<Link
-								key={item.name}
-								href={item.href}
-								className="px-3 py-2 rounded-md text-sm font-medium text-neutral-700 hover:text-primary-600 hover:bg-primary-50 transition-colors"
-							>
-								{item.name}
-							</Link>
+					<div className="hidden md:flex items-center">
+						{navigation.map((item, index) => (
+							<div key={item.name} className="flex items-center">
+								{index > 0 && (
+									<span className="text-neutral-300 mx-1">/</span>
+								)}
+								<Link
+									href={item.href}
+									className="px-2 py-2 rounded-md text-sm font-medium text-neutral-700 hover:text-primary-600 hover:bg-primary-50 transition-colors"
+								>
+									{item.name}
+								</Link>
+							</div>
 						))}
 					</div>
 

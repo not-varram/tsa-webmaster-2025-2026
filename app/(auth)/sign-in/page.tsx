@@ -59,7 +59,7 @@ export default function SignInPage() {
 						W
 					</div>
 					<h1 className="text-3xl font-bold text-gray-900">Welcome back</h1>
-					<p className="mt-2 text-gray-600">Sign in to your WTSA Hub account</p>
+					<p className="mt-2 text-gray-600">Sign in to your WTSA Coalesce account</p>
 				</div>
 
 				{/* Form Card */}

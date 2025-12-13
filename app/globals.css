@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
 @layer components {
   .container {
@@ -57,5 +58,32 @@
   .wtsa-page-bg {
     background: linear-gradient(135deg, #f9fafb 0%, #eff6ff 100%);
     background-color: #f9fafb; /* Fallback */
+  }
+
+  /* Coalesce branding */
+  .font-coalesce {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .animate-coalesce {
+    animation: coalesceIn 1s ease-out forwards;
+  }
+
+  @keyframes coalesceIn {
+    0% {
+      opacity: 0;
+      letter-spacing: 0.3em;
+      filter: blur(4px);
+    }
+    50% {
+      opacity: 0.7;
+      letter-spacing: 0.1em;
+      filter: blur(1px);
+    }
+    100% {
+      opacity: 1;
+      letter-spacing: 0.02em;
+      filter: blur(0);
+    }
   }
 }

@@ -19,12 +19,15 @@ export function Footer() {
                         <div className="flex items-center space-x-2 mb-4">
                             <Image
                                 src="/site-logo.png"
-                                alt="WTSA Hub Logo"
+                                alt="WTSA Coalesce Logo"
                                 width={40}
                                 height={40}
                                 className="rounded-lg"
                             />
-                            <span className="font-bold text-xl">WTSA Hub</span>
+                            <span className="flex items-baseline gap-1">
+                                <span className="font-bold text-xl">WTSA</span>
+                                <span className="font-coalesce text-xl italic text-primary-300">Coalesce</span>
+                            </span>
                         </div>
                         <p className="text-neutral-400 text-sm leading-relaxed">
                             Unity Through Community: Connecting Washington TSA chapters through shared

@@ -2,8 +2,9 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { ResourceCard } from '@/components/cards/ResourceCard';
 import { ChapterCard } from '@/components/cards/ChapterCard';
+import { HeroSection } from '@/components/home/HeroSection';
 import prisma from '@/lib/db';
-import { ArrowRight, Search, Users, Sparkles } from 'lucide-react';
+import { ArrowRight, Search } from 'lucide-react';
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -31,41 +32,7 @@ export default async function HomePage() {
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
-            <section className="relative wtsa-hero-gradient text-white overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
-                <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-                    <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in">
-                        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-4">
-                            <Sparkles className="w-4 h-4" />
-                            <span>Unity Through Community</span>
-                        </div>
-                        <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-                            The WTSA Chapter
-                            <br />
-                            <span className="text-primary-100">Resource Hub</span>
-                        </h1>
-                        <p className="text-xl md:text-2xl text-primary-50 max-w-2xl mx-auto">
-                            Connecting Washington TSA chapters through shared resources, mentorship, and
-                            collaboration
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                            <Link href="/resources">
-                                <Button size="lg" className="bg-white text-primary-700 hover:bg-primary-50 shadow-xl">
-                                    Explore Resources
-                                    <ArrowRight className="ml-2 w-5 h-5" />
-                                </Button>
-                            </Link>
-                            <Link href="/chapters">
-                                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                                    Meet the Chapters
-                                    <Users className="ml-2 w-5 h-5" />
-                                </Button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
-            </section>
+            <HeroSection />
 
             {/* Highlighted Resources */}
             <section className="section bg-white">

@@ -13,7 +13,7 @@ export default function AboutPage() {
             <section className="wtsa-header-gradient text-white py-20">
                 <div className="container">
                     <div className="max-w-4xl mx-auto text-center">
-                        <h1 className="text-4xl md:text-6xl font-bold mb-6">About the WTSA Hub</h1>
+                        <h1 className="text-4xl md:text-6xl font-bold mb-6">About WTSA Coalesce</h1>
                         <p className="text-2xl text-primary-50">
                             Building Unity Through Community across Washington TSA
                         </p>

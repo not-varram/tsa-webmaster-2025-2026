@@ -91,7 +91,7 @@ export default function SignUpPage() {
 						W
 					</div>
 					<h1 className="text-3xl font-bold text-gray-900">Create your account</h1>
-					<p className="mt-2 text-gray-600">Join your chapter on WTSA Hub</p>
+					<p className="mt-2 text-gray-600">Join your chapter on WTSA Coalesce</p>
 				</div>
 
 				{/* Form Card */}
