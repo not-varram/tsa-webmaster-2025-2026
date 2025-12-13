@@ -85,7 +85,17 @@ export async function GET(request: NextRequest) {
 			orderBy: { createdAt: 'desc' },
 		})
 		
-		return NextResponse.json({ posts })
+		// For "my posts", include contact info for fulfilled posts
+		// This info should only be visible to the original poster
+		const postsWithContactInfo = myPosts ? posts : posts.map((post) => ({
+			...post,
+			contactName: null,
+			contactEmail: null,
+			contactPhone: null,
+			contactNotes: null,
+		}))
+		
+		return NextResponse.json({ posts: postsWithContactInfo })
 	} catch (error) {
 		console.error('Error fetching posts:', error)
 		return NextResponse.json(
@@ -149,7 +159,10 @@ export async function POST(request: NextRequest) {
 			)
 		}
 		
-		// Create the post - it goes to PENDING status for admin review
+		// Auto-approve posts from admins and chapter admins
+		const isAdmin = session.role === 'ADMIN' || session.role === 'CHAPTER_ADMIN'
+		
+		// Create the post - auto-approve for admins, pending for regular users
 		const post = await prisma.resourcePost.create({
 			data: {
 				title: title.trim(),
@@ -159,7 +172,9 @@ export async function POST(request: NextRequest) {
 				tags: tags || [],
 				authorId: session.id,
 				chapterId: session.chapterId,
-				status: PostStatus.PENDING,
+				status: isAdmin ? PostStatus.APPROVED : PostStatus.PENDING,
+				reviewedById: isAdmin ? session.id : undefined,
+				reviewedAt: isAdmin ? new Date() : undefined,
 			},
 			include: {
 				author: {
@@ -179,7 +194,9 @@ export async function POST(request: NextRequest) {
 		
 		return NextResponse.json({
 			post,
-			message: 'Post created successfully. It will be visible once approved by an admin.',
+			message: isAdmin 
+				? 'Post created and published successfully!' 
+				: 'Post created successfully. It will be visible once approved by an admin.',
 		})
 	} catch (error) {
 		console.error('Error creating post:', error)

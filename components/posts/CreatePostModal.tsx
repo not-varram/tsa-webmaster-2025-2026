@@ -17,9 +17,10 @@ type CreatePostModalProps = {
 	isOpen: boolean
 	onClose: () => void
 	onSuccess: () => void
+	isAdmin?: boolean
 }
 
-export function CreatePostModal({ isOpen, onClose, onSuccess }: CreatePostModalProps) {
+export function CreatePostModal({ isOpen, onClose, onSuccess, isAdmin = false }: CreatePostModalProps) {
 	const [isLoading, setIsLoading] = useState(false)
 	const [error, setError] = useState('')
 	const [formData, setFormData] = useState({
@@ -229,10 +230,16 @@ export function CreatePostModal({ isOpen, onClose, onSuccess }: CreatePostModalP
 					</div>
 					
 					{/* Info notice */}
-					<div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
-						<strong>Note:</strong> Your post will be reviewed by an admin before appearing publicly.
-						You&apos;ll be notified once it&apos;s approved.
-					</div>
+					{isAdmin ? (
+						<div className="p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-800">
+							<strong>Admin:</strong> Your post will be published immediately without review.
+						</div>
+					) : (
+						<div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
+							<strong>Note:</strong> Your post will be reviewed by an admin before appearing publicly.
+							You&apos;ll be notified once it&apos;s approved.
+						</div>
+					)}
 					
 					{/* Actions */}
 					<div className="flex gap-3 pt-2">
@@ -252,10 +259,10 @@ export function CreatePostModal({ isOpen, onClose, onSuccess }: CreatePostModalP
 							{isLoading ? (
 								<>
 									<Loader2 className="w-4 h-4 mr-2 animate-spin" />
-									Submitting...
+									{isAdmin ? 'Publishing...' : 'Submitting...'}
 								</>
 							) : (
-								'Submit for Review'
+								isAdmin ? 'Publish Post' : 'Submit for Review'
 							)}
 						</Button>
 					</div>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Eye, EyeOff, Loader2, Key, CheckCircle, AlertCircle, Package } from 'lucide-react'
+import { Eye, EyeOff, Loader2, Key, CheckCircle, AlertCircle, Package, User, Edit2, Save, X } from 'lucide-react'
 import { MyPostsList } from '@/components/posts/MyPostsList'
 
 type AuthUser = {
@@ -28,6 +28,13 @@ export default function ProfilePage() {
 		newPassword: '',
 		confirmPassword: '',
 	})
+	
+	// Name editing state
+	const [isEditingName, setIsEditingName] = useState(false)
+	const [newName, setNewName] = useState('')
+	const [isUpdatingName, setIsUpdatingName] = useState(false)
+	const [nameError, setNameError] = useState('')
+	const [nameSuccess, setNameSuccess] = useState(false)
 
 	useEffect(() => {
 		async function fetchUser() {
@@ -39,6 +46,7 @@ export default function ProfilePage() {
 					return
 				}
 				setUser(data.user)
+				setNewName(data.user.name)
 			} catch (err) {
 				console.error('Failed to fetch user:', err)
 				router.push('/sign-in')
@@ -48,6 +56,43 @@ export default function ProfilePage() {
 		}
 		fetchUser()
 	}, [router])
+
+	const handleNameUpdate = async (e: React.FormEvent) => {
+		e.preventDefault()
+		setNameError('')
+		setNameSuccess(false)
+		
+		if (newName.trim().length < 2) {
+			setNameError('Name must be at least 2 characters')
+			return
+		}
+		
+		setIsUpdatingName(true)
+		
+		try {
+			const res = await fetch('/api/auth/update-profile', {
+				method: 'PATCH',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ name: newName.trim() }),
+			})
+			
+			const data = await res.json()
+			
+			if (!res.ok) {
+				setNameError(data.error || 'Failed to update name')
+				return
+			}
+			
+			setUser(data.user)
+			setNameSuccess(true)
+			setIsEditingName(false)
+			setTimeout(() => setNameSuccess(false), 3000)
+		} catch {
+			setNameError('Network error. Please try again.')
+		} finally {
+			setIsUpdatingName(false)
+		}
+	}
 
 	const handlePasswordChange = async (e: React.FormEvent) => {
 		e.preventDefault()
@@ -80,7 +125,7 @@ export default function ProfilePage() {
 
 			setPasswordSuccess(true)
 			setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' })
-		} catch (err) {
+		} catch {
 			setError('Network error. Please try again.')
 		} finally {
 			setIsChangingPassword(false)
@@ -135,7 +180,54 @@ export default function ProfilePage() {
 							{user.name.charAt(0).toUpperCase()}
 						</div>
 						<div className="flex-1">
-							<h2 className="text-xl font-semibold text-gray-900">{user.name}</h2>
+							{isEditingName ? (
+								<form onSubmit={handleNameUpdate} className="flex items-center gap-2 mb-2">
+									<input
+										type="text"
+										value={newName}
+										onChange={(e) => setNewName(e.target.value)}
+										className="text-xl font-semibold text-gray-900 px-2 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+										autoFocus
+									/>
+									<button
+										type="submit"
+										disabled={isUpdatingName}
+										className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+									>
+										{isUpdatingName ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
+									</button>
+									<button
+										type="button"
+										onClick={() => {
+											setIsEditingName(false)
+											setNewName(user.name)
+											setNameError('')
+										}}
+										className="p-1.5 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors"
+									>
+										<X className="w-5 h-5" />
+									</button>
+								</form>
+							) : (
+								<div className="flex items-center gap-2 mb-1">
+									<h2 className="text-xl font-semibold text-gray-900">{user.name}</h2>
+									<button
+										onClick={() => setIsEditingName(true)}
+										className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition-colors"
+										title="Edit name"
+									>
+										<Edit2 className="w-4 h-4" />
+									</button>
+									{nameSuccess && (
+										<span className="text-green-600 text-sm flex items-center gap-1">
+											<CheckCircle className="w-4 h-4" /> Updated!
+										</span>
+									)}
+								</div>
+							)}
+							{nameError && (
+								<p className="text-red-600 text-sm mb-1">{nameError}</p>
+							)}
 							<p className="text-gray-600">{user.email}</p>
 							<div className="flex flex-wrap gap-2 mt-2">
 								{getRoleBadge()}
@@ -150,6 +242,53 @@ export default function ProfilePage() {
 					</div>
 				</div>
 
+				{/* Edit Profile Card */}
+				<div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
+					<div className="px-6 py-4 border-b border-gray-200">
+						<h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+							<User className="w-5 h-5" />
+							Account Settings
+						</h2>
+						<p className="text-sm text-gray-600">Manage your account information</p>
+					</div>
+					<div className="p-6">
+						<div className="space-y-4">
+							<div>
+								<label className="block text-sm font-medium text-gray-700 mb-1">Display Name</label>
+								<div className="flex items-center gap-2">
+									<input
+										type="text"
+										value={user.name}
+										disabled
+										className="flex-1 px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-gray-600"
+									/>
+									<button
+										onClick={() => {
+											setNewName(user.name)
+											setIsEditingName(true)
+											setNameError('')
+										}}
+										className="px-4 py-2 text-primary-600 hover:bg-primary-50 rounded-lg transition-colors text-sm font-medium"
+									>
+										Edit
+									</button>
+								</div>
+								<p className="text-xs text-gray-500 mt-1">This name is visible to other users</p>
+							</div>
+							<div>
+								<label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+								<input
+									type="email"
+									value={user.email}
+									disabled
+									className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-gray-600"
+								/>
+								<p className="text-xs text-gray-500 mt-1">Contact your chapter admin to change your email</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				{/* My Posts Card */}
 				<div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
 					<div className="px-6 py-4 border-b border-gray-200">
@@ -157,7 +296,7 @@ export default function ProfilePage() {
 							<Package className="w-5 h-5" />
 							My Resource Posts
 						</h2>
-						<p className="text-sm text-gray-600">Track your resource requests and offerings</p>
+						<p className="text-sm text-gray-600">Track your resource requests and offerings (including fulfilled ones)</p>
 					</div>
 					<MyPostsList />
 				</div>
@@ -256,4 +395,3 @@ export default function ProfilePage() {
 		</div>
 	)
 }
-

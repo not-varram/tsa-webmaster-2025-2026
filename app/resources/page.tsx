@@ -14,6 +14,7 @@ export const revalidate = 0 // Dynamic for user-specific content
 export default async function ResourcesPage() {
     const session = await getSession()
     const isVerified = await isVerifiedUser()
+    const isAdmin = session?.role === 'ADMIN' || session?.role === 'CHAPTER_ADMIN'
     
     const resources = await prisma.resource.findMany({
         include: {
@@ -56,7 +57,8 @@ export default async function ResourcesPage() {
                 <div className="container">
                     <CommunityPostsClient 
                         isSignedIn={!!session} 
-                        isVerified={isVerified} 
+                        isVerified={isVerified}
+                        isAdmin={isAdmin}
                     />
                 </div>
             </section>

@@ -3,8 +3,9 @@
 import { useState, useEffect, useCallback } from 'react'
 import { PostCard } from './PostCard'
 import { CreatePostModal } from './CreatePostModal'
-import { Plus, Search, Package, RefreshCw, Filter } from 'lucide-react'
+import { Plus, Search, Package, RefreshCw, Filter, CheckCircle, History } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import Link from 'next/link'
 
 const POST_CATEGORIES = [
 	'Technical Materials',
@@ -45,14 +46,16 @@ type Post = {
 type CommunityPostsClientProps = {
 	isSignedIn: boolean
 	isVerified: boolean
+	isAdmin?: boolean
 }
 
-export function CommunityPostsClient({ isSignedIn, isVerified }: CommunityPostsClientProps) {
+export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }: CommunityPostsClientProps) {
 	const [posts, setPosts] = useState<Post[]>([])
 	const [isLoading, setIsLoading] = useState(true)
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [typeFilter, setTypeFilter] = useState<'' | 'REQUEST' | 'OFFERING'>('')
 	const [categoryFilter, setCategoryFilter] = useState('')
+	const [statusFilter, setStatusFilter] = useState<'APPROVED' | 'FILLED'>('APPROVED')
 	
 	const fetchPosts = useCallback(async () => {
 		setIsLoading(true)
@@ -60,6 +63,7 @@ export function CommunityPostsClient({ isSignedIn, isVerified }: CommunityPostsC
 			const params = new URLSearchParams()
 			if (typeFilter) params.set('type', typeFilter)
 			if (categoryFilter) params.set('category', categoryFilter)
+			params.set('status', statusFilter)
 			
 			const res = await fetch(`/api/posts?${params.toString()}`)
 			const data = await res.json()
@@ -69,7 +73,7 @@ export function CommunityPostsClient({ isSignedIn, isVerified }: CommunityPostsC
 		} finally {
 			setIsLoading(false)
 		}
-	}, [typeFilter, categoryFilter])
+	}, [typeFilter, categoryFilter, statusFilter])
 	
 	useEffect(() => {
 		fetchPosts()
@@ -89,39 +93,75 @@ export function CommunityPostsClient({ isSignedIn, isVerified }: CommunityPostsC
 					</p>
 				</div>
 				
-				{isSignedIn && isVerified && (
-					<Button onClick={() => setIsModalOpen(true)} className="shrink-0">
-						<Plus className="w-4 h-4 mr-2" />
-						Create Post
-					</Button>
-				)}
+				<div className="flex items-center gap-3">
+					{isSignedIn && (
+						<Link href="/profile" className="text-sm text-primary-600 hover:underline">
+							My Posts
+						</Link>
+					)}
+					{isSignedIn && isVerified && (
+						<Button onClick={() => setIsModalOpen(true)} className="shrink-0">
+							<Plus className="w-4 h-4 mr-2" />
+							Create Post
+						</Button>
+					)}
+				</div>
 			</div>
 			
-			{/* Stats cards */}
-			<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-				<div className="bg-white rounded-xl border border-neutral-200 p-4">
-					<div className="flex items-center gap-3">
-						<div className="p-2 bg-amber-100 rounded-lg">
-							<Search className="w-5 h-5 text-amber-700" />
-						</div>
-						<div>
-							<div className="text-2xl font-bold text-neutral-900">{requestCount}</div>
-							<div className="text-xs text-neutral-500">Active Requests</div>
-						</div>
-					</div>
-				</div>
-				<div className="bg-white rounded-xl border border-neutral-200 p-4">
-					<div className="flex items-center gap-3">
-						<div className="p-2 bg-emerald-100 rounded-lg">
-							<Package className="w-5 h-5 text-emerald-700" />
-						</div>
-						<div>
-							<div className="text-2xl font-bold text-neutral-900">{offeringCount}</div>
-							<div className="text-xs text-neutral-500">Available Offerings</div>
-						</div>
-					</div>
-				</div>
+			{/* Status tabs */}
+			<div className="flex gap-2 border-b border-neutral-200 pb-4">
+				<button
+					onClick={() => setStatusFilter('APPROVED')}
+					className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+						statusFilter === 'APPROVED'
+							? 'bg-green-100 text-green-800 border border-green-200'
+							: 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+					}`}
+				>
+					<Search className="w-4 h-4" />
+					Active Posts
+				</button>
+				<button
+					onClick={() => setStatusFilter('FILLED')}
+					className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+						statusFilter === 'FILLED'
+							? 'bg-blue-100 text-blue-800 border border-blue-200'
+							: 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+					}`}
+				>
+					<CheckCircle className="w-4 h-4" />
+					Fulfilled
+					<History className="w-3 h-3" />
+				</button>
 			</div>
+			
+			{/* Stats cards - only for active posts */}
+			{statusFilter === 'APPROVED' && (
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+					<div className="bg-white rounded-xl border border-neutral-200 p-4">
+						<div className="flex items-center gap-3">
+							<div className="p-2 bg-amber-100 rounded-lg">
+								<Search className="w-5 h-5 text-amber-700" />
+							</div>
+							<div>
+								<div className="text-2xl font-bold text-neutral-900">{requestCount}</div>
+								<div className="text-xs text-neutral-500">Active Requests</div>
+							</div>
+						</div>
+					</div>
+					<div className="bg-white rounded-xl border border-neutral-200 p-4">
+						<div className="flex items-center gap-3">
+							<div className="p-2 bg-emerald-100 rounded-lg">
+								<Package className="w-5 h-5 text-emerald-700" />
+							</div>
+							<div>
+								<div className="text-2xl font-bold text-neutral-900">{offeringCount}</div>
+								<div className="text-xs text-neutral-500">Available Offerings</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			)}
 			
 			{/* Filters */}
 			<div className="glass-card rounded-xl p-4">
@@ -209,13 +249,17 @@ export function CommunityPostsClient({ isSignedIn, isVerified }: CommunityPostsC
 			) : (
 				<div className="text-center py-12 bg-white rounded-xl border border-neutral-200">
 					<Package className="w-12 h-12 text-neutral-300 mx-auto mb-4" />
-					<h3 className="text-lg font-semibold text-neutral-900 mb-2">No posts yet</h3>
+					<h3 className="text-lg font-semibold text-neutral-900 mb-2">
+						{statusFilter === 'FILLED' ? 'No fulfilled posts yet' : 'No posts yet'}
+					</h3>
 					<p className="text-neutral-600 mb-4">
-						{typeFilter || categoryFilter
-							? 'No posts match your current filters.'
-							: 'Be the first to post a request or share a resource!'}
+						{statusFilter === 'FILLED'
+							? 'Fulfilled requests and offerings will appear here.'
+							: typeFilter || categoryFilter
+								? 'No posts match your current filters.'
+								: 'Be the first to post a request or share a resource!'}
 					</p>
-					{isSignedIn && isVerified && (
+					{statusFilter === 'APPROVED' && isSignedIn && isVerified && (
 						<Button onClick={() => setIsModalOpen(true)}>
 							<Plus className="w-4 h-4 mr-2" />
 							Create First Post
@@ -257,8 +301,8 @@ export function CommunityPostsClient({ isSignedIn, isVerified }: CommunityPostsC
 				isOpen={isModalOpen}
 				onClose={() => setIsModalOpen(false)}
 				onSuccess={fetchPosts}
+				isAdmin={isAdmin}
 			/>
 		</div>
 	)
 }
-
