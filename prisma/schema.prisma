@@ -10,8 +10,14 @@ datasource db {
 enum UserRole {
   PUBLIC
   STUDENT
-  ADVISOR
+  CHAPTER_ADMIN
   ADMIN
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 enum ResourceType {
@@ -51,14 +57,20 @@ enum RequestStatus {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  clerkId   String   @unique  // Clerk user ID
-  name      String
-  email     String   @unique
-  role      UserRole @default(PUBLIC)
-  chapterId String?
-  chapter   Chapter? @relation(fields: [chapterId], references: [id])
-  verified  Boolean  @default(false)  // For student verification by chapter admins
+  id           String             @id @default(cuid())
+  email        String             @unique
+  password     String             // Hashed password with salt
+  name         String
+  role         UserRole           @default(STUDENT)
+  chapterId    String?
+  chapter      Chapter?           @relation(fields: [chapterId], references: [id])
+  
+  // Verification system for students
+  verificationStatus VerificationStatus @default(PENDING)
+  verifiedById       String?           // Chapter admin who verified this student
+  verifiedBy         User?             @relation("VerifiedBy", fields: [verifiedById], references: [id])
+  verifiedStudents   User[]            @relation("VerifiedBy")
+  verifiedAt         DateTime?
   
   forumThreads     ForumThread[]
   forumReplies     ForumReply[]
@@ -69,21 +81,32 @@ model User {
 
   @@index([email])
   @@index([chapterId])
-  @@index([clerkId])
+  @@index([verificationStatus])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([token])
+  @@index([userId])
 }
 
 model Chapter {
-  id        String   @id @default(cuid())
-  slug      String   @unique
-  name      String
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  name       String
   schoolName String
-  city      String
-  region    String
-  about     String   @db.Text
-  focusTags String[]
-  latitude  Float?
-  longitude Float?
-  adminEmails String[]  // Emails of chapter admins who can manage this chapter
+  city       String
+  region     String
+  about      String   @db.Text
+  focusTags  String[]
+  latitude   Float?
+  longitude  Float?
+  adminEmails String[] // Emails of chapter admins who can manage this chapter
   
   users              User[]
   resources          Resource[]

@@ -1,31 +1,28 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { ClerkProvider } from '@clerk/nextjs';
+import type { Metadata } from 'next'
+import { DM_Sans } from 'next/font/google'
+import './globals.css'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 
-const inter = Inter({ subsets: ['latin'] });
+const dmSans = DM_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] })
 
 export const metadata: Metadata = {
-    title: 'WTSA Community Resource Hub',
-    description: 'Connecting Washington TSA chapters through shared resources, mentorship, and community collaboration',
-};
+	title: 'WTSA Community Resource Hub',
+	description: 'Connecting Washington TSA chapters through shared resources, mentorship, and community collaboration',
+}
 
 export default function RootLayout({
-    children,
+	children,
 }: {
-    children: React.ReactNode;
+	children: React.ReactNode
 }) {
-    return (
-        <html lang="en">
-            <body className={`${inter.className} flex flex-col min-h-screen`}>
-                <ClerkProvider>
-                    <Header />
-                    <main className="flex-grow">{children}</main>
-                    <Footer />
-                </ClerkProvider>
-            </body>
-        </html>
-    );
+	return (
+		<html lang="en">
+			<body className={`${dmSans.className} flex flex-col min-h-screen`}>
+				<Header />
+				<main className="flex-grow">{children}</main>
+				<Footer />
+			</body>
+		</html>
+	)
 }
