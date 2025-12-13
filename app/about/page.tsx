@@ -61,7 +61,6 @@ export default function AboutPage() {
                                     'Chapters can discover and access resources created by WTSA and fellow chapters',
                                     'Students and advisors can find exactly what they need through powerful search and filtering',
                                     'New or struggling chapters can connect with mentors through our buddy program',
-                                    'Success stories inspire collaboration and show what\'s possible when chapters work together',
                                     'Anyone can contribute by suggesting new resources to help the community grow',
                                 ].map((item) => (
                                     <li key={item} className="flex items-start gap-3">
@@ -158,7 +157,7 @@ export default function AboutPage() {
                                 <strong className="text-neutral-900">For Competition Judges:</strong> This site
                                 fulfills the "Community Resource Hub" brief by providing an interactive directory,
                                 highlighting key resources, offering a suggestion form, and adding substantial value
-                                through chapter profiles, Unity Stories, and a mentorship program. See the{' '}
+                                through chapter profiles, events calendar, and a mentorship program. See the{' '}
                                 <a href="/judges" className="text-primary-600 hover:text-primary-700 font-medium">
                                     For Judges page
                                 </a>{' '}

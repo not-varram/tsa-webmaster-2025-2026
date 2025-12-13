@@ -10,7 +10,6 @@ const navigation = [
     { name: 'Resource Hub', href: '/resources' },
     { name: 'Chapters', href: '/chapters' },
     { name: 'Events', href: '/events' },
-    { name: 'Unity Stories', href: '/stories' },
     { name: 'About', href: '/about' },
     { name: 'For Judges', href: '/judges' },
 ];

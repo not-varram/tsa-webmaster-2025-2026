@@ -87,7 +87,6 @@ model Chapter {
   
   users              User[]
   resources          Resource[]
-  storyLinks         ChapterStoryLink[]
   mentorPairs        MentorPair[]       @relation("MentorChapter")
   menteePairs        MentorPair[]       @relation("MenteeChapter")
   requestsMade       ResourceRequest[]  @relation("RequestingChapter")
@@ -167,31 +166,6 @@ model Event {
 
   @@index([slug])
   @@index([startDatetime])
-}
-
-model Story {
-  id              String   @id @default(cuid())
-  slug            String   @unique
-  title           String
-  excerpt         String
-  body            String   @db.Text
-  featuredImageUrl String?
-  
-  chapterLinks ChapterStoryLink[]
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([slug])
-}
-
-model ChapterStoryLink {
-  chapterId String
-  storyId   String
-  chapter   Chapter @relation(fields: [chapterId], references: [id])
-  story     Story   @relation(fields: [storyId], references: [id])
-
-  @@id([chapterId, storyId])
 }
 
 model MentorPair {

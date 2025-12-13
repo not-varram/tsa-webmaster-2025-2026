@@ -17,15 +17,14 @@ We interpreted "community" as the entire WTSA ecosystem—students, advisors, ch
 1. **Interactive Resource Directory** - Searchable, filterable database of resources
 2. **Highlighted Resources** - Showcases 3+ important programs on the home page
 3. **Resource Suggestion Form** - Public form for contributing new resources
-4. **Additional Content** - Chapter profiles, Unity Stories, Events, Mentor program
+4. **Additional Content** - Chapter profiles, Events, Mentor program
 
 ### Pages
 
-- **Home** - Hero, highlights, directory preview, chapter connections, Unity Stories
+- **Home** - Hero, highlights, directory preview, chapter connections
 - **Resource Hub** - Full directory with search and filtering
 - **Chapters** - Directory of WTSA chapters with profiles
 - **Events** - Calendar of workshops, competitions, and training
-- **Unity Stories** - Blog showcasing cross-chapter collaboration
 - **About** - Explanation of our solution and theme
 - **Suggest Resource** - Form to contribute resources
 - **For Judges** - Technical documentation and compliance information
@@ -104,7 +103,6 @@ tsa-webmaster-2025-2026/
 │   ├── resources/         # Resource hub pages
 │   ├── chapters/          # Chapter directory pages
 │   ├── events/            # Events page
-│   ├── stories/           # Unity Stories pages
 │   ├── suggest/           # Suggestion form
 │   ├── judges/            # For judges page
 │   ├── student-work-log/  # Work log page
@@ -133,15 +131,13 @@ tsa-webmaster-2025-2026/
 
 ## Database Schema
 
-The application uses 8 main tables:
+The application uses 6 main tables:
 
 - **User** - User accounts (students, advisors, admins)
 - **Chapter** - TSA chapters with locations and details
 - **Resource** - Shared resources (guides, templates, tools)
 - **Suggestion** - Pending resource suggestions
 - **Event** - Workshops, competitions, training sessions
-- **Story** - Unity Stories blog posts
-- **ChapterStoryLink** - Many-to-many join table
 - **MentorPair** - Mentor/mentee chapter relationships
 
 See `prisma/schema.prisma` for the complete schema.
@@ -153,7 +149,7 @@ This project fully complies with the TSA Webmaster competition requirements:
 ✅ Interactive directory with search and filters  
 ✅ At least 3 highlighted resources  
 ✅ Public resource suggestion form  
-✅ Substantial additional content (chapters, stories, events, mentorship)  
+✅ Substantial additional content (chapters, events, mentorship)  
 ✅ Student Work Log page  
 ✅ Copyright Checklist page  
 ✅ Responsive design (mobile, tablet, desktop)  

@@ -135,7 +135,7 @@ export default function JudgesPage() {
                                     <div>
                                         <h3 className="font-semibold text-neutral-900 mb-1">Additional Content</h3>
                                         <p className="text-neutral-700">
-                                            Chapter directory with profiles, Unity Stories blog, Events calendar, and
+                                            Chapter directory with profiles, Events calendar, and
                                             Mentor/Mentee program tracking—all adding substantial value beyond basic
                                             requirements.
                                         </p>

@@ -2,7 +2,6 @@ import prisma from '@/lib/db';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ResourceCard } from '@/components/cards/ResourceCard';
-import { StoryCard } from '@/components/cards/StoryCard';
 import { MapPin, Users, Award } from 'lucide-react';
 
 type Props = {
@@ -45,11 +44,6 @@ export default async function ChapterDetailPage({ params }: Props) {
                     chapter: {
                         select: { id: true, name: true },
                     },
-                },
-            },
-            storyLinks: {
-                include: {
-                    story: true,
                 },
             },
         },
@@ -125,20 +119,6 @@ export default async function ChapterDetailPage({ params }: Props) {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {chapter.resources.map((resource) => (
                                             <ResourceCard key={resource.id} resource={resource} />
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Unity Stories */}
-                            {chapter.storyLinks.length > 0 && (
-                                <div>
-                                    <h2 className="text-2xl font-bold text-neutral-900 mb-6">
-                                        Featured in Unity Stories
-                                    </h2>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        {chapter.storyLinks.map((link) => (
-                                            <StoryCard key={link.storyId} story={link.story} />
                                         ))}
                                     </div>
                                 </div>

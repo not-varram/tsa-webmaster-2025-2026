@@ -21,7 +21,7 @@ export default function StudentWorkLogPage() {
                     task: 'Database Schema Design',
                     members: 'Backend Developer',
                     tools: 'Prisma, PostgreSQL, DrawSQL',
-                    notes: 'Designed complete data model with 8 tables including relationships for chapters, resources, stories, and mentorship',
+                    notes: 'Designed complete data model with tables for chapters, resources, events, users, and mentorship relationships',
                 },
                 {
                     task: 'Visual Design System',
@@ -50,7 +50,7 @@ export default function StudentWorkLogPage() {
                     task: 'Core UI Components',
                     members: 'Frontend Developer',
                     tools: 'React, TypeScript, Tailwind',
-                    notes: 'Built Button, Card, Header, Footer, and specialized card components (Resource, Chapter, Event, Story)',
+                    notes: 'Built Button, Card, Header, Footer, and specialized card components (Resource, Chapter, Event)',
                 },
             ],
         },
@@ -61,7 +61,7 @@ export default function StudentWorkLogPage() {
                     task: 'Home Page Development',
                     members: 'Full Stack Developer',
                     tools: 'Next.js, Prisma, React',
-                    notes: 'Created hero section, highlighted resources display, directory preview, chapter connection area, Unity Stories feed',
+                    notes: 'Created hero section, highlighted resources display, directory preview, chapter connection area',
                 },
                 {
                     task: 'Resource Hub & Search',
@@ -87,10 +87,10 @@ export default function StudentWorkLogPage() {
                     notes: 'Created submission form with validation, API endpoint to store suggestions in database',
                 },
                 {
-                    task: 'Events & Stories Pages',
+                    task: 'Events & About Pages',
                     members: 'Frontend Developer',
                     tools: 'Next.js, React, Prisma',
-                    notes: 'Built Events calendar view, Unity Stories listing and detail pages with chapter attribution',
+                    notes: 'Built Events calendar view with filtering, comprehensive About page with theme explanation',
                 },
                 {
                     task: 'About & Judges Pages',

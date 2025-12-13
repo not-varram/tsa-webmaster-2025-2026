@@ -2,9 +2,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { ResourceCard } from '@/components/cards/ResourceCard';
 import { ChapterCard } from '@/components/cards/ChapterCard';
-import { StoryCard } from '@/components/cards/StoryCard';
 import prisma from '@/lib/db';
-import { ArrowRight, Search, Users, BookOpen, Sparkles } from 'lucide-react';
+import { ArrowRight, Search, Users, Sparkles } from 'lucide-react';
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -27,12 +26,6 @@ export default async function HomePage() {
     const chapters = await prisma.chapter.findMany({
         take: 4,
         orderBy: { name: 'asc' },
-    });
-
-    // Fetch recent stories
-    const stories = await prisma.story.findMany({
-        orderBy: { createdAt: 'desc' },
-        take: 3,
     });
 
     return (
@@ -178,41 +171,6 @@ export default async function HomePage() {
                                 <ChapterCard key={chapter.id} chapter={chapter} />
                             ))}
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Unity Stories Feed */}
-            <section className="section bg-gradient-to-br from-primary-50 to-accent-50">
-                <div className="container">
-                    <div className="text-center mb-12">
-                        <div className="inline-flex items-center gap-2 mb-4">
-                            <BookOpen className="w-6 h-6 text-primary-600" />
-                            <span className="text-sm font-semibold text-primary-600 uppercase tracking-wide">
-                                Unity Stories
-                            </span>
-                        </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
-                            Chapters Working Together
-                        </h2>
-                        <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-                            Real stories of collaboration, mentorship, and community building across WTSA
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        {stories.map((story) => (
-                            <StoryCard key={story.id} story={story} />
-                        ))}
-                    </div>
-
-                    <div className="text-center">
-                        <Link href="/stories">
-                            <Button size="lg" variant="outline">
-                                Read All Stories
-                                <ArrowRight className="ml-2 w-4 h-4" />
-                            </Button>
-                        </Link>
                     </div>
                 </div>
             </section>

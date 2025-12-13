@@ -4,7 +4,6 @@ const quickLinks = [
     { name: 'Resource Hub', href: '/resources' },
     { name: 'Chapters', href: '/chapters' },
     { name: 'Events', href: '/events' },
-    { name: 'Unity Stories', href: '/stories' },
     { name: 'Student Work Log', href: '/student-work-log' },
     { name: 'Copyright Checklist', href: '/copyright-checklist' },
 ];
