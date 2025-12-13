@@ -56,6 +56,19 @@ enum RequestStatus {
   CANCELLED
 }
 
+enum PostType {
+  REQUEST    // Looking for a resource
+  OFFERING   // Offering a resource to share
+}
+
+enum PostStatus {
+  PENDING    // Awaiting admin approval
+  APPROVED   // Visible on forum
+  REJECTED   // Rejected by admin
+  FILLED     // Request fulfilled or offering claimed
+  CLOSED     // Closed by author
+}
+
 model User {
   id           String             @id @default(cuid())
   email        String             @unique
@@ -75,6 +88,12 @@ model User {
   forumThreads     ForumThread[]
   forumReplies     ForumReply[]
   resourceRequests ResourceRequest[]
+  
+  // Resource posting system
+  resourcePosts        ResourcePost[]  @relation("PostAuthor")
+  reviewedPosts        ResourcePost[]  @relation("PostReviewer")
+  postComments         PostComment[]
+  filledPosts          ResourcePost[]  @relation("PostFiller")
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -114,6 +133,7 @@ model Chapter {
   menteePairs        MentorPair[]       @relation("MenteeChapter")
   requestsMade       ResourceRequest[]  @relation("RequestingChapter")
   requestsReceived   ResourceRequest[]  @relation("OwningChapter")
+  resourcePosts      ResourcePost[]
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -269,4 +289,70 @@ model ForumReply {
 
   @@index([threadId])
   @@index([authorId])
+}
+
+// Resource posting system - for community resource requests and offerings
+model ResourcePost {
+  id          String     @id @default(cuid())
+  title       String
+  description String     @db.Text
+  type        PostType   // REQUEST or OFFERING
+  category    String     // e.g., "Technical Materials", "Building Materials", "Equipment"
+  tags        String[]
+  
+  // Author info
+  authorId    String
+  author      User       @relation("PostAuthor", fields: [authorId], references: [id])
+  chapterId   String?
+  chapter     Chapter?   @relation(fields: [chapterId], references: [id])
+  
+  // Contact info (filled by responders)
+  contactName  String?
+  contactEmail String?
+  contactPhone String?
+  contactNotes String?   @db.Text
+  
+  // Status and approval
+  status        PostStatus @default(PENDING)
+  reviewedById  String?
+  reviewedBy    User?      @relation("PostReviewer", fields: [reviewedById], references: [id])
+  reviewedAt    DateTime?
+  rejectionReason String?  @db.Text
+  
+  // Fulfillment
+  filledById    String?
+  filledBy      User?      @relation("PostFiller", fields: [filledById], references: [id])
+  filledAt      DateTime?
+  
+  // Forum comments
+  comments PostComment[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([authorId])
+  @@index([chapterId])
+  @@index([status])
+  @@index([type])
+  @@index([category])
+  @@index([createdAt])
+}
+
+model PostComment {
+  id        String       @id @default(cuid())
+  postId    String
+  post      ResourcePost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User         @relation(fields: [authorId], references: [id])
+  content   String       @db.Text
+  
+  // For marking a comment as the "fulfillment" response
+  isFulfillment Boolean  @default(false)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([postId])
+  @@index([authorId])
+  @@index([createdAt])
 }

@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Eye, EyeOff, Loader2, User, Key, CheckCircle, AlertCircle } from 'lucide-react'
+import { Eye, EyeOff, Loader2, Key, CheckCircle, AlertCircle, Package } from 'lucide-react'
+import { MyPostsList } from '@/components/posts/MyPostsList'
 
 type AuthUser = {
 	id: string
@@ -147,6 +148,18 @@ export default function ProfilePage() {
 							)}
 						</div>
 					</div>
+				</div>
+
+				{/* My Posts Card */}
+				<div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
+					<div className="px-6 py-4 border-b border-gray-200">
+						<h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+							<Package className="w-5 h-5" />
+							My Resource Posts
+						</h2>
+						<p className="text-sm text-gray-600">Track your resource requests and offerings</p>
+					</div>
+					<MyPostsList />
 				</div>
 
 				{/* Change Password Card */}

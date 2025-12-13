@@ -1,15 +1,20 @@
-import prisma from '@/lib/db';
-import { ResourcesClient } from '@/components/resources/ResourcesClient';
-import { Metadata } from 'next';
+import prisma from '@/lib/db'
+import { ResourcesClient } from '@/components/resources/ResourcesClient'
+import { CommunityPostsClient } from '@/components/posts/CommunityPostsClient'
+import { getSession, isVerifiedUser } from '@/lib/auth'
+import { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'Resource Hub - WTSA Community',
     description: 'Browse and search our comprehensive directory of TSA resources including templates, guides, workshops, and tools shared by WTSA and chapters.',
-};
+}
 
-export const revalidate = 1800; // Revalidate every 30 minutes
+export const revalidate = 0 // Dynamic for user-specific content
 
 export default async function ResourcesPage() {
+    const session = await getSession()
+    const isVerified = await isVerifiedUser()
+    
     const resources = await prisma.resource.findMany({
         include: {
             chapter: {
@@ -23,13 +28,13 @@ export default async function ResourcesPage() {
             { highlighted: 'desc' },
             { createdAt: 'desc' },
         ],
-    });
+    })
 
     const serializedResources = resources.map((r) => ({
         ...r,
         createdAt: r.createdAt.toISOString(),
         updatedAt: r.updatedAt.toISOString(),
-    }));
+    }))
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50">
@@ -40,19 +45,34 @@ export default async function ResourcesPage() {
                         <h1 className="text-4xl md:text-5xl font-bold mb-4">Resource Hub</h1>
                         <p className="text-xl text-primary-50">
                             Discover tools, templates, guides, and workshops created by WTSA and shared by
-                            chapters across Washington. Everything you need to strengthen your chapter and
-                            succeed in competition.
+                            chapters across Washington. Request resources you need or share what you have with the community.
                         </p>
                     </div>
                 </div>
             </section>
 
-            {/* Resources */}
+            {/* Community Posts */}
+            <section className="section border-b border-neutral-200">
+                <div className="container">
+                    <CommunityPostsClient 
+                        isSignedIn={!!session} 
+                        isVerified={isVerified} 
+                    />
+                </div>
+            </section>
+
+            {/* Official Resources */}
             <section className="section">
                 <div className="container">
+                    <div className="mb-8">
+                        <h2 className="text-2xl font-bold text-neutral-900">Official Resources</h2>
+                        <p className="text-neutral-600 mt-1">
+                            Curated resources from WTSA and chapters across Washington
+                        </p>
+                    </div>
                     <ResourcesClient initialResources={serializedResources} />
                 </div>
             </section>
         </div>
-    );
+    )
 }
