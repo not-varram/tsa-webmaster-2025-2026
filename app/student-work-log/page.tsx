@@ -174,7 +174,7 @@ export default function StudentWorkLogPage() {
     return (
         <div className="min-h-screen bg-neutral-50">
             {/* Header */}
-            <section className="bg-gradient-to-r from-primary-600 to-accent-600 text-white py-16">
+            <section className="wtsa-header-gradient text-white py-16">
                 <div className="container">
                     <div className="flex items-center gap-4 mb-4">
                         <FileText className="w-10 h-10" />
@@ -214,7 +214,7 @@ export default function StudentWorkLogPage() {
                     <div className="space-y-8">
                         {workLog.map((week, weekIdx) => (
                             <div key={weekIdx} className="bg-white rounded-xl shadow-sm overflow-hidden">
-                                <div className="bg-gradient-to-r from-primary-600 to-accent-600 text-white px-6 py-4">
+                                <div className="wtsa-header-gradient text-white px-6 py-4">
                                     <h2 className="text-xl font-bold">{week.dateRange}</h2>
                                 </div>
                                 <div className="p-6">

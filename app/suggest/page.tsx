@@ -72,7 +72,7 @@ export default function SuggestPage() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50">
             {/* Header */}
-            <section className="bg-gradient-to-r from-primary-600 to-accent-600 text-white py-16">
+            <section className="wtsa-header-gradient text-white py-16">
                 <div className="container">
                     <div className="max-w-3xl">
                         <h1 className="text-4xl md:text-5xl font-bold mb-4">Suggest a Resource</h1>

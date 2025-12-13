@@ -42,4 +42,20 @@
   .hover-lift {
     @apply transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl;
   }
+
+  /* Custom Gradients - Hardcoded to bypass Tailwind issues */
+  .wtsa-hero-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #dc2626 100%);
+    background-color: #2563eb; /* Fallback */
+  }
+
+  .wtsa-header-gradient {
+    background: linear-gradient(90deg, #2563eb 0%, #dc2626 100%);
+    background-color: #2563eb; /* Fallback */
+  }
+
+  .wtsa-page-bg {
+    background: linear-gradient(135deg, #f9fafb 0%, #eff6ff 100%);
+    background-color: #f9fafb; /* Fallback */
+  }
 }

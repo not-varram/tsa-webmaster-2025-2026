@@ -71,7 +71,7 @@ export default async function ChapterDetailPage({ params }: Props) {
     return (
         <div className="min-h-screen bg-neutral-50">
             {/* Header */}
-            <section className="bg-gradient-to-r from-primary-600 to-accent-600 text-white py-16">
+            <section className="wtsa-header-gradient text-white py-16">
                 <div className="container">
                     <div className="mb-4">
                         <Link href="/chapters" className="text-primary-100 hover:text-white font-medium">

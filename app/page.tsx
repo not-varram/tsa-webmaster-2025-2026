@@ -31,7 +31,7 @@ export default async function HomePage() {
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 text-white overflow-hidden">
+            <section className="relative wtsa-hero-gradient text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
                 <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
                     <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in">

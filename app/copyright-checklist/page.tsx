@@ -178,7 +178,7 @@ export default function CopyrightChecklistPage() {
     return (
         <div className="min-h-screen bg-neutral-50">
             {/* Header */}
-            <section className="bg-gradient-to-r from-primary-600 to-accent-600 text-white py-16">
+            <section className="wtsa-header-gradient text-white py-16">
                 <div className="container">
                     <div className="flex items-center gap-4 mb-4">
                         <CheckCircle className="w-10 h-10" />

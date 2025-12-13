@@ -12,7 +12,7 @@ export default function JudgesPage() {
     return (
         <div className="min-h-screen bg-neutral-50">
             {/* Header */}
-            <section className="bg-gradient-to-r from-neutral-900 to-neutral-800 text-white py-16">
+            <section className="wtsa-header-gradient text-white py-16">
                 <div className="container">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">For Competition Judges</h1>
                     <p className="text-xl text-neutral-300">
