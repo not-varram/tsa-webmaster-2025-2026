@@ -74,8 +74,51 @@
     }
   }
 
-  .hover-lift {
-    @apply transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl;
+  /* Card gradient border animation */
+  .card-gradient-hover {
+    @apply transition-all duration-300;
+  }
+
+  .card-gradient-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    padding: 2px;
+    pointer-events: none;
+    
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    
+    background-image: 
+      linear-gradient(to right, #dc2626, #2563eb), 
+      linear-gradient(to bottom, #2563eb, #dc2626), 
+      linear-gradient(to right, #dc2626, #2563eb), 
+      linear-gradient(to bottom, #dc2626, #2563eb);
+      
+    background-size: 0% 100%, 100% 0%, 0% 100%, 100% 0%;
+    background-position: 0 0, 100% 0, 0 100%, 0 0;
+    background-repeat: no-repeat;
+    
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .card-gradient-hover:hover .card-gradient-border {
+    opacity: 1;
+    animation: borderFill 0.6s forwards linear;
+  }
+
+  @keyframes borderFill {
+    0% {
+      background-size: 0% 100%, 100% 0%, 0% 100%, 100% 0%;
+    }
+    50% {
+      background-size: 100% 100%, 100% 0%, 0% 100%, 100% 100%;
+    }
+    100% {
+      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    }
   }
 
   /* Custom Gradients - Hardcoded to bypass Tailwind issues */
