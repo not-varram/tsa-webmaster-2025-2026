@@ -10,7 +10,7 @@ async function hashPassword(password: string): Promise<string> {
 async function main() {
 	console.log('🌱 Seeding database...')
 
-	// Create chapters with admin emails
+	// Create chapters with admin emails - All 7 WTSA chapters
 	const chapters = await Promise.all([
 		prisma.chapter.create({
 			data: {
@@ -24,6 +24,20 @@ async function main() {
 				latitude: 47.7062,
 				longitude: -122.1857,
 				adminEmails: ['admin@lwhs.edu', 'advisor@lwhs.edu'],
+			},
+		}),
+		prisma.chapter.create({
+			data: {
+				slug: 'tesla-stem-hs',
+				name: 'Tesla STEM High School TSA',
+				schoolName: 'Tesla STEM High School',
+				city: 'Redmond',
+				region: 'King County',
+				about: 'A STEM-focused charter school with a strong emphasis on technology innovation, computer science, and competitive robotics. Our chapter excels in technical events.',
+				focusTags: ['STEM', 'Innovation', 'Computer Science', 'Robotics'],
+				latitude: 47.6848,
+				longitude: -122.0932,
+				adminEmails: ['admin@teslastem.edu'],
 			},
 		}),
 		prisma.chapter.create({
@@ -54,6 +68,48 @@ async function main() {
 				adminEmails: ['admin@jhs.edu'],
 			},
 		}),
+		prisma.chapter.create({
+			data: {
+				slug: 'eastlake-hs',
+				name: 'Eastlake High School TSA',
+				schoolName: 'Eastlake High School',
+				city: 'Sammamish',
+				region: 'King County',
+				about: 'Located in the heart of Sammamish, our chapter focuses on engineering design, architecture, and digital media. We actively collaborate with neighboring chapters.',
+				focusTags: ['Engineering Design', 'Architecture', 'Digital Media', 'Collaboration'],
+				latitude: 47.6081,
+				longitude: -122.0548,
+				adminEmails: ['admin@ehs.edu'],
+			},
+		}),
+		prisma.chapter.create({
+			data: {
+				slug: 'kirkland-ms',
+				name: 'Kirkland Middle School TSA',
+				schoolName: 'Kirkland Middle School',
+				city: 'Kirkland',
+				region: 'King County',
+				about: 'Introducing middle schoolers to the exciting world of TSA! Our chapter focuses on foundational skills in technology, teamwork, and problem-solving.',
+				focusTags: ['Middle School', 'Foundations', 'Teamwork', 'Problem Solving'],
+				latitude: 47.6815,
+				longitude: -122.2087,
+				adminEmails: ['admin@kms.edu'],
+			},
+		}),
+		prisma.chapter.create({
+			data: {
+				slug: 'einstein-ms',
+				name: 'Einstein Middle School TSA',
+				schoolName: 'Einstein Middle School',
+				city: 'Shoreline',
+				region: 'King County',
+				about: 'Named after the great physicist, our chapter inspires young minds to explore science and technology. We specialize in STEM exploration and hands-on learning.',
+				focusTags: ['Middle School', 'STEM Exploration', 'Hands-on Learning', 'Science'],
+				latitude: 47.7589,
+				longitude: -122.3476,
+				adminEmails: ['admin@ems.edu'],
+			},
+		}),
 	])
 
 	console.log(`✅ Created ${chapters.length} chapters`)
@@ -80,6 +136,18 @@ async function main() {
 			name: 'Lake Washington Admin',
 			role: UserRole.CHAPTER_ADMIN,
 			chapterId: chapters[0].id,
+			verificationStatus: VerificationStatus.APPROVED,
+		},
+	})
+
+	// Chapter Admin for Tesla STEM
+	const teslaChapterAdmin = await prisma.user.create({
+		data: {
+			email: 'admin@teslastem.edu',
+			password: hashedPassword,
+			name: 'Tesla STEM Admin',
+			role: UserRole.CHAPTER_ADMIN,
+			chapterId: chapters[1].id,
 			verificationStatus: VerificationStatus.APPROVED,
 		},
 	})
@@ -181,7 +249,7 @@ async function main() {
 				category: 'Competition Prep',
 				tags: ['webmaster', 'competition', 'web development'],
 				origin: 'CHAPTER',
-				chapterId: chapters[1].id,
+				chapterId: chapters[2].id,
 				url: 'https://example.com/webmaster-guide',
 			},
 		}),
@@ -225,7 +293,7 @@ async function main() {
 				category: 'Marketing',
 				tags: ['marketing', 'social media', 'templates', 'branding'],
 				origin: 'CHAPTER',
-				chapterId: chapters[2].id,
+				chapterId: chapters[3].id,
 				url: 'https://example.com/marketing-templates',
 			},
 		}),
@@ -241,6 +309,36 @@ async function main() {
 				tags: ['community service', 'outreach', 'STEM education'],
 				origin: 'WTSA',
 				url: 'https://example.com/service-projects',
+			},
+		}),
+		prisma.resource.create({
+			data: {
+				slug: 'robotics-getting-started',
+				title: 'Robotics Getting Started Guide',
+				summary: 'Introduction to competitive robotics for TSA',
+				description: 'Everything you need to know to start a robotics program at your chapter. Covers equipment, programming basics, and competition preparation.',
+				type: 'GUIDE',
+				audience: ['Students', 'Advisors'],
+				category: 'Competition Prep',
+				tags: ['robotics', 'VEX', 'programming', 'getting started'],
+				origin: 'CHAPTER',
+				chapterId: chapters[1].id,
+				url: 'https://example.com/robotics-guide',
+			},
+		}),
+		prisma.resource.create({
+			data: {
+				slug: 'middle-school-tsa-handbook',
+				title: 'Middle School TSA Handbook',
+				summary: 'Comprehensive guide for middle school chapters',
+				description: 'Tailored resources and competition tips specifically for middle school TSA chapters. Includes age-appropriate project ideas and mentorship guidance.',
+				type: 'GUIDE',
+				audience: ['Middle School Students', 'Advisors'],
+				category: 'Operations',
+				tags: ['middle school', 'handbook', 'getting started'],
+				origin: 'CHAPTER',
+				chapterId: chapters[5].id,
+				url: 'https://example.com/ms-handbook',
 			},
 		}),
 	])
@@ -297,6 +395,18 @@ async function main() {
 				location: 'Virtual (Google Meet)',
 			},
 		}),
+		prisma.event.create({
+			data: {
+				slug: 'regional-robotics-meetup',
+				title: 'Regional Robotics Meetup',
+				description: 'Bring your robots and meet other chapters! Practice sessions, friendly scrimmages, and technical workshops.',
+				startDatetime: new Date('2026-02-08T10:00:00'),
+				endDatetime: new Date('2026-02-08T15:00:00'),
+				type: 'Meetup',
+				audience: ['Students'],
+				location: 'Tesla STEM High School, Redmond',
+			},
+		}),
 	])
 
 	console.log(`✅ Created ${events.length} events`)
@@ -306,9 +416,25 @@ async function main() {
 		prisma.mentorPair.create({
 			data: {
 				mentorChapterId: chapters[0].id, // Lake Washington
-				menteeChapterId: chapters[2].id, // Juanita
+				menteeChapterId: chapters[5].id, // Kirkland MS
 				status: 'ACTIVE',
-				notes: 'Focused on competition prep and chapter organization',
+				notes: 'High school mentoring middle school on competition prep and chapter organization',
+			},
+		}),
+		prisma.mentorPair.create({
+			data: {
+				mentorChapterId: chapters[1].id, // Tesla STEM
+				menteeChapterId: chapters[6].id, // Einstein MS
+				status: 'ACTIVE',
+				notes: 'STEM-focused mentorship for robotics and coding events',
+			},
+		}),
+		prisma.mentorPair.create({
+			data: {
+				mentorChapterId: chapters[2].id, // Redmond HS
+				menteeChapterId: chapters[3].id, // Juanita HS
+				status: 'ACTIVE',
+				notes: 'Collaboration on webmaster and software development events',
 			},
 		}),
 	])
@@ -335,7 +461,8 @@ async function main() {
 	console.log('')
 	console.log('📝 Test Accounts:')
 	console.log('   WTSA Admin: admin@wtsa.org / password123')
-	console.log('   Chapter Admin: admin@lwhs.edu / password123')
+	console.log('   Chapter Admin (LWHS): admin@lwhs.edu / password123')
+	console.log('   Chapter Admin (Tesla): admin@teslastem.edu / password123')
 	console.log('   Student: student@lwhs.edu / password123')
 }
 
