@@ -25,12 +25,12 @@ export default function JudgesPage() {
             <section className="bg-white border-b border-neutral-200 py-6">
                 <div className="container">
                     <div className="flex flex-wrap gap-4">
-                        {/* <Link href="/student-work-log">
+                        <Link href="/student-work-log">
                             <Button variant="outline">
                                 <FileText className="w-4 h-4 mr-2" />
                                 Student Work Log
                             </Button>
-                        </Link> */}
+                        </Link>
                         <Link href="/copyright-checklist">
                             <Button variant="outline">
                                 <CheckCircle className="w-4 h-4 mr-2" />
@@ -315,7 +315,7 @@ export default function JudgesPage() {
                             </p>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <Link
+                                {/* <Link
                                     href="/student-work-log"
                                     className="block p-6 bg-white rounded-lg border-2 border-primary-200 hover:border-primary-400 hover:shadow-md transition-all"
                                 >
@@ -326,7 +326,7 @@ export default function JudgesPage() {
                                     <p className="text-sm text-neutral-600">
                                         Detailed timeline of tasks, team responsibilities, and development process
                                     </p>
-                                </Link>
+                                </Link> */}
 
                                 <Link
                                     href="/copyright-checklist"
