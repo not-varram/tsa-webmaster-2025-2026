@@ -141,26 +141,6 @@ export default async function HomePage() {
                     </div>
                 </div>
             </section>
-
-            {/* CTA Section */}
-            <section className="section bg-primary-600">
-                <div className="container">
-                    <div className="max-w-3xl mx-auto text-center space-y-6">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white">
-                            Know a Resource Your Fellow Chapters Should See?
-                        </h2>
-                        <p className="text-xl text-primary-100">
-                            Help strengthen our community by suggesting new resources, tools, or opportunities
-                        </p>
-                        <Link href="/suggest">
-                            <Button size="lg" className="bg-white text-primary-700 hover:bg-primary-50">
-                                Suggest a Resource
-                                <ArrowRight className="ml-2 w-5 h-5" />
-                            </Button>
-                        </Link>
-                    </div>
-                </div>
-            </section>
         </div>
     );
 }

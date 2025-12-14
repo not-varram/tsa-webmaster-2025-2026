@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { Eye, EyeOff, UserPlus, Loader2, AlertCircle, Info } from 'lucide-react'
 
 type Chapter = {
@@ -87,8 +88,15 @@ export default function SignUpPage() {
 			<div className="w-full max-w-md">
 				{/* Logo/Header */}
 				<div className="text-center mb-8">
-					<div className="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-2xl text-white font-bold text-2xl mb-4 shadow-lg">
-						W
+					<div className="inline-block mb-6">
+						<Image
+							src="/site-logo.png"
+							alt="WTSA Logo"
+							width={120}
+							height={120}
+							priority
+							className="mx-auto"
+						/>
 					</div>
 					<h1 className="text-3xl font-bold text-neutral-900">Create your account</h1>
 					<p className="mt-2 text-neutral-600">Join your chapter on WTSA Coalesce</p>
