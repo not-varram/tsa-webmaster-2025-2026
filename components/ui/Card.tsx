@@ -10,12 +10,17 @@ export function Card({ className, children, hoverable = false }: CardProps) {
     return (
         <div
             className={cn(
-                'bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden',
-                hoverable && 'hover-lift cursor-pointer',
+                'relative bg-white rounded-xl border border-neutral-200 overflow-hidden',
+                hoverable && 'card-gradient-hover cursor-pointer hover:border-transparent',
                 className
             )}
         >
-            {children}
+            {hoverable && (
+                <div className="card-gradient-border" aria-hidden="true" />
+            )}
+            <div className="relative z-10 h-full">
+                {children}
+            </div>
         </div>
     );
 }
