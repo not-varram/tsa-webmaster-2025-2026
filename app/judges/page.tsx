@@ -25,12 +25,12 @@ export default function JudgesPage() {
             <section className="bg-white border-b border-neutral-200 py-6">
                 <div className="container">
                     <div className="flex flex-wrap gap-4">
-                        <Link href="/student-work-log">
+                        {/* <Link href="/student-work-log">
                             <Button variant="outline">
                                 <FileText className="w-4 h-4 mr-2" />
                                 Student Work Log
                             </Button>
-                        </Link>
+                        </Link> */}
                         <Link href="/copyright-checklist">
                             <Button variant="outline">
                                 <CheckCircle className="w-4 h-4 mr-2" />

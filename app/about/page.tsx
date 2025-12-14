@@ -34,13 +34,10 @@ export default function AboutPage() {
                                 <h2 className="text-3xl font-bold text-neutral-900">The Challenge We Saw</h2>
                             </div>
                             <p className="text-lg text-neutral-700 leading-relaxed mb-4">
-                                Many TSA chapters across Washington operate in isolation, especially new or
-                                geographically distant ones. They often recreate resources from scratch, miss out on
-                                collaboration opportunities, and struggle to find mentorship when they need it most.
+                            Many TSA chapters across Washington operate with uneven access to resources and support. Some chapters are underfunded or lack essential materials to run competitive projects, while others have surplus equipment in certain areas but fall short in others.
                             </p>
                             <p className="text-lg text-neutral-700 leading-relaxed">
-                                Meanwhile, established chapters have years of experience, proven templates, and
-                                successful strategies—but no easy way to share them with chapters that need help.
+                            This imbalance, combined with limited access to experienced mentorship, leaves many chapters rebuilding from scratch and missing opportunities for collaboration and growth.
                             </p>
                         </div>
 
