@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={`${dmSans.className} flex flex-col min-h-screen`}>
+			<body className={`${dmSans.className} flex flex-col min-h-screen grid-bg`}>
 				<Header />
 				<main className="flex-grow">{children}</main>
 				<Footer />

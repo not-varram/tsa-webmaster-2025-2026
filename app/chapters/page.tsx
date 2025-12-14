@@ -25,13 +25,13 @@ export default async function ChaptersPage() {
     }, {} as Record<string, typeof chapters>);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="wtsa-header-gradient text-white py-16">
-                <div className="container">
+            <section className="page-header-accent py-16 relative">
+                <div className="container relative z-10">
                     <div className="max-w-3xl">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">WTSA Chapters</h1>
-                        <p className="text-xl text-primary-50">
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">WTSA Chapters</h1>
+                        <p className="text-xl text-neutral-600">
                             Connect with TSA chapters across Washington. From Spokane to Seattle, discover what
                             other chapters are working on and find mentorship opportunities.
                         </p>
@@ -43,17 +43,17 @@ export default async function ChaptersPage() {
             <section className="section">
                 <div className="container">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                        <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-neutral-200">
                             <div className="text-4xl font-bold text-primary-600 mb-2">{chapters.length}</div>
                             <div className="text-neutral-600">Active Chapters</div>
                         </div>
-                        <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                        <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-neutral-200">
                             <div className="text-4xl font-bold text-primary-600 mb-2">
                                 {Object.keys(chaptersByRegion).length}
                             </div>
                             <div className="text-neutral-600">Regions</div>
                         </div>
-                        <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                        <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-neutral-200">
                             <div className="text-4xl font-bold text-primary-600 mb-2">
                                 {await prisma.mentorPair.count({ where: { status: 'ACTIVE' } })}
                             </div>

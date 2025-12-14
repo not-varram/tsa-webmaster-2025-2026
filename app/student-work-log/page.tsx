@@ -172,15 +172,15 @@ export default function StudentWorkLogPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-neutral-50">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="wtsa-header-gradient text-white py-16">
-                <div className="container">
+            <section className="page-header-accent py-16 relative">
+                <div className="container relative z-10">
                     <div className="flex items-center gap-4 mb-4">
-                        <FileText className="w-10 h-10" />
-                        <h1 className="text-4xl md:text-5xl font-bold">Student Work Log</h1>
+                        <FileText className="w-10 h-10 text-primary-600" />
+                        <h1 className="text-4xl md:text-5xl font-bold text-neutral-900">Student Work Log</h1>
                     </div>
-                    <p className="text-xl text-primary-50 max-w-3xl">
+                    <p className="text-xl text-neutral-600 max-w-3xl">
                         Complete timeline of tasks, team member responsibilities, tools used, and development
                         process for the WTSA Community Resource Hub
                     </p>
@@ -192,19 +192,19 @@ export default function StudentWorkLogPage() {
                 <div className="container max-w-6xl">
                     {/* Summary Stats */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-                        <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                        <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-neutral-200">
                             <div className="text-3xl font-bold text-primary-600 mb-2">7</div>
                             <div className="text-neutral-600">Weeks</div>
                         </div>
-                        <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                        <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-neutral-200">
                             <div className="text-3xl font-bold text-primary-600 mb-2">50+</div>
                             <div className="text-neutral-600">Files Created</div>
                         </div>
-                        <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                        <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-neutral-200">
                             <div className="text-3xl font-bold text-primary-600 mb-2">15+</div>
                             <div className="text-neutral-600">Pages</div>
                         </div>
-                        <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                        <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-neutral-200">
                             <div className="text-3xl font-bold text-primary-600 mb-2">100%</div>
                             <div className="text-neutral-600">Team Effort</div>
                         </div>
@@ -213,8 +213,8 @@ export default function StudentWorkLogPage() {
                     {/* Timeline */}
                     <div className="space-y-8">
                         {workLog.map((week, weekIdx) => (
-                            <div key={weekIdx} className="bg-white rounded-xl shadow-sm overflow-hidden">
-                                <div className="wtsa-header-gradient text-white px-6 py-4">
+                            <div key={weekIdx} className="bg-white rounded-xl shadow-sm overflow-hidden border border-neutral-200">
+                                <div className="bg-primary-600 text-white px-6 py-4">
                                     <h2 className="text-xl font-bold">{week.dateRange}</h2>
                                 </div>
                                 <div className="p-6">
@@ -223,7 +223,7 @@ export default function StudentWorkLogPage() {
                                             <div key={taskIdx} className="border-l-4 border-primary-200 pl-6 py-2">
                                                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                                                     <div className="lg:col-span-2">
-                                                        <h3 className="font-semibold text-neutral-900 mb- 1">{task.task}</h3>
+                                                        <h3 className="font-semibold text-neutral-900 mb-1">{task.task}</h3>
                                                     </div>
                                                     <div>
                                                         <div className="text-xs text-neutral-500 uppercase tracking-wide mb-1">
@@ -253,7 +253,7 @@ export default function StudentWorkLogPage() {
                     </div>
 
                     {/* Tools Summary */}
-                    <div className="mt-12 bg-white rounded-xl p-8 shadow-sm">
+                    <div className="mt-12 bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
                         <h2 className="text-2xl font-bold text-neutral-900 mb-6">Tools & Technologies Used</h2>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                             {[

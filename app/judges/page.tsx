@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 
 export default function JudgesPage() {
     return (
-        <div className="min-h-screen bg-neutral-50">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="wtsa-header-gradient text-white py-16">
-                <div className="container">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">For Competition Judges</h1>
-                    <p className="text-xl text-neutral-300">
+            <section className="page-header-accent py-16 relative">
+                <div className="container relative z-10">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">For Competition Judges</h1>
+                    <p className="text-xl text-neutral-600">
                         Technical documentation and compliance information for the 2025-2026 TSA Webmaster event
                     </p>
                 </div>
@@ -46,7 +46,7 @@ export default function JudgesPage() {
                 <div className="container max-w-5xl">
                     <div className="space-y-8">
                         {/* Problem & Solution */}
-                        <div className="bg-white rounded-xl p-8 shadow-sm">
+                        <div className="bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
                             <h2 className="text-2xl font-bold text-neutral-900 mb-4">
                                 Problem Statement & Solution
                             </h2>
@@ -71,7 +71,7 @@ export default function JudgesPage() {
                         </div>
 
                         {/* Brief Compliance */}
-                        <div className="bg-white rounded-xl p-8 shadow-sm">
+                        <div className="bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
                             <h2 className="text-2xl font-bold text-neutral-900 mb-4">
                                 Competition Brief Compliance
                             </h2>
@@ -145,7 +145,7 @@ export default function JudgesPage() {
                         </div>
 
                         {/* Technology Stack */}
-                        <div className="bg-white rounded-xl p-8 shadow-sm">
+                        <div className="bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
                             <div className="flex items-center gap-3 mb-4">
                                 <Code className="w-6 h-6 text-primary-600" />
                                 <h2 className="text-2xl font-bold text-neutral-900">Technology Stack</h2>
@@ -195,7 +195,7 @@ export default function JudgesPage() {
                         </div>
 
                         {/* Accessibility */}
-                        <div className="bg-white rounded-xl p-8 shadow-sm">
+                        <div className="bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
                             <h2 className="text-2xl font-bold text-neutral-900 mb-4">
                                 Accessibility & Responsive Design
                             </h2>
@@ -256,7 +256,7 @@ export default function JudgesPage() {
                         </div>
 
                         {/* Testing */}
-                        <div className="bg-white rounded-xl p-8 shadow-sm">
+                        <div className="bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
                             <h2 className="text-2xl font-bold text-neutral-900 mb-4">Testing Strategy</h2>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

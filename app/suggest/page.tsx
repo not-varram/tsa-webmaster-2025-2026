@@ -46,9 +46,9 @@ export default function SuggestPage() {
 
     if (submitted) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50 flex items-center justify-center py-20">
+            <div className="min-h-screen flex items-center justify-center py-20">
                 <div className="container">
-                    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-12 text-center">
+                    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-12 text-center border border-neutral-200">
                         <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                             <CheckCircle className="w-12 h-12 text-green-600" />
                         </div>
@@ -70,13 +70,13 @@ export default function SuggestPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="wtsa-header-gradient text-white py-16">
-                <div className="container">
+            <section className="page-header-accent py-16 relative">
+                <div className="container relative z-10">
                     <div className="max-w-3xl">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">Suggest a Resource</h1>
-                        <p className="text-xl text-primary-50">
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">Suggest a Resource</h1>
+                        <p className="text-xl text-neutral-600">
                             Know of a great resource that could help other WTSA chapters? Share it with our
                             community! Your suggestion will be reviewed and added to the hub.
                         </p>
@@ -87,7 +87,7 @@ export default function SuggestPage() {
             {/* Form */}
             <section className="section">
                 <div className="container">
-                    <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                    <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12 border border-neutral-200">
                         <form onSubmit={handleSubmit} className="space-y-6">
                             {/* Resource Name */}
                             <div>

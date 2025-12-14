@@ -38,13 +38,13 @@ export default async function ResourcesPage() {
     }))
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="wtsa-header-gradient text-white py-16">
-                <div className="container">
+            <section className="page-header-accent py-16 relative">
+                <div className="container relative z-10">
                     <div className="max-w-3xl">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">Resource Hub</h1>
-                        <p className="text-xl text-primary-50">
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">Resource Hub</h1>
+                        <p className="text-xl text-neutral-600">
                             Discover tools, templates, guides, and workshops created by WTSA and shared by
                             chapters across Washington. Request resources you need or share what you have with the community.
                         </p>

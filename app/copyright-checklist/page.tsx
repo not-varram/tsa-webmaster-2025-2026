@@ -176,15 +176,15 @@ export default function CopyrightChecklistPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-neutral-50">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="wtsa-header-gradient text-white py-16">
-                <div className="container">
+            <section className="page-header-accent py-16 relative">
+                <div className="container relative z-10">
                     <div className="flex items-center gap-4 mb-4">
-                        <CheckCircle className="w-10 h-10" />
-                        <h1 className="text-4xl md:text-5xl font-bold">Copyright Checklist</h1>
+                        <CheckCircle className="w-10 h-10 text-primary-600" />
+                        <h1 className="text-4xl md:text-5xl font-bold text-neutral-900">Copyright Checklist</h1>
                     </div>
-                    <p className="text-xl text-primary-50 max-w-3xl">
+                    <p className="text-xl text-neutral-600 max-w-3xl">
                         Complete attribution for all external assets, libraries, and content used in the WTSA
                         Community Resource Hub, along with identification of original student work
                     </p>
@@ -213,7 +213,7 @@ export default function CopyrightChecklistPage() {
                     {/* Assets by Category */}
                     <div className="space-y-8">
                         {assets.map((category, idx) => (
-                            <div key={idx} className="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <div key={idx} className="bg-white rounded-xl shadow-sm overflow-hidden border border-neutral-200">
                                 <div className="bg-neutral-800 text-white px-6 py-4">
                                     <h2 className="text-xl font-bold">{category.category}</h2>
                                 </div>
@@ -289,7 +289,7 @@ export default function CopyrightChecklistPage() {
                     </div>
 
                     {/* License Information */}
-                    <div className="mt-12 bg-white rounded-xl p-8 shadow-sm">
+                    <div className="mt-12 bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
                         <h2 className="text-2xl font-bold text-neutral-900 mb-6">License Information</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -323,7 +323,7 @@ export default function CopyrightChecklistPage() {
                     </div>
 
                     {/* Student Original Work Summary */}
-                    <div className="mt-12 bg-gradient-to-br from-green-50 to-primary-50 border-2 border-green-300 rounded-xl p-8">
+                    <div className="mt-12 bg-green-50 border-2 border-green-300 rounded-xl p-8">
                         <h2 className="text-2xl font-bold text-neutral-900 mb-4">Student Original Work</h2>
                         <p className="text-neutral-700 mb-6">
                             The following components represent 100% original student work created specifically for

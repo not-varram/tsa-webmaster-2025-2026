@@ -72,40 +72,40 @@ export default async function ChapterDashboardPage() {
 	const approvedCount = students.filter(s => s.verificationStatus === VerificationStatus.APPROVED).length
 
 	return (
-		<div className="min-h-[calc(100vh-4rem)] bg-gray-50">
+		<div className="min-h-[calc(100vh-4rem)]">
 			<div className="container mx-auto px-4 py-8">
 				{/* Header */}
 				<div className="mb-8">
-					<h1 className="text-3xl font-bold text-gray-900">Chapter Dashboard</h1>
-					<p className="text-gray-600 mt-1">{chapter?.name} - {chapter?.schoolName}</p>
+					<h1 className="text-3xl font-bold text-neutral-900">Chapter Dashboard</h1>
+					<p className="text-neutral-600 mt-1">{chapter?.name} - {chapter?.schoolName}</p>
 				</div>
 
 				{/* Stats */}
 				<div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-					<div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-						<div className="text-3xl font-bold text-gray-900">{students.length}</div>
-						<div className="text-gray-600">Total Students</div>
+					<div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
+						<div className="text-3xl font-bold text-neutral-900">{students.length}</div>
+						<div className="text-neutral-600">Total Students</div>
 					</div>
-					<div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+					<div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
 						<div className="text-3xl font-bold text-amber-600">{pendingStudentCount}</div>
-						<div className="text-gray-600">Pending Verification</div>
+						<div className="text-neutral-600">Pending Verification</div>
 					</div>
-					<div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+					<div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
 						<div className="text-3xl font-bold text-green-600">{approvedCount}</div>
-						<div className="text-gray-600">Verified Students</div>
+						<div className="text-neutral-600">Verified Students</div>
 					</div>
-					<div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+					<div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
 						<div className="text-3xl font-bold text-blue-600">{pendingPosts.length}</div>
-						<div className="text-gray-600">Pending Posts</div>
+						<div className="text-neutral-600">Pending Posts</div>
 					</div>
 				</div>
 
 				{/* Pending Posts */}
 				{pendingPosts.length > 0 && (
-					<div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
-						<div className="px-6 py-4 border-b border-gray-200 bg-blue-50">
-							<h2 className="text-xl font-semibold text-gray-900">Review Resource Posts</h2>
-							<p className="text-sm text-gray-600">
+					<div className="bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden mb-8">
+						<div className="px-6 py-4 border-b border-neutral-200 bg-blue-50">
+							<h2 className="text-xl font-semibold text-neutral-900">Review Resource Posts</h2>
+							<p className="text-sm text-neutral-600">
 								{pendingPosts.length} post{pendingPosts.length !== 1 ? 's' : ''} awaiting your approval
 							</p>
 						</div>
@@ -119,10 +119,10 @@ export default async function ChapterDashboardPage() {
 				)}
 
 				{/* Student Management */}
-				<div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-					<div className="px-6 py-4 border-b border-gray-200">
-						<h2 className="text-xl font-semibold text-gray-900">Manage Students</h2>
-						<p className="text-sm text-gray-600">Verify students and manage their accounts</p>
+				<div className="bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden">
+					<div className="px-6 py-4 border-b border-neutral-200">
+						<h2 className="text-xl font-semibold text-neutral-900">Manage Students</h2>
+						<p className="text-sm text-neutral-600">Verify students and manage their accounts</p>
 					</div>
 					<StudentManagement
 						students={students.map(s => ({
@@ -138,4 +138,3 @@ export default async function ChapterDashboardPage() {
 		</div>
 	)
 }
-

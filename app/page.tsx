@@ -35,7 +35,7 @@ export default async function HomePage() {
             <HeroSection />
 
             {/* Highlighted Resources */}
-            <section className="section bg-white">
+            <section className="section">
                 <div className="container">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
@@ -64,7 +64,7 @@ export default async function HomePage() {
             </section>
 
             {/* Interactive Directory Preview */}
-            <section className="section bg-gradient-to-br from-neutral-50 to-primary-50">
+            <section className="section border-y border-neutral-200">
                 <div className="container">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
@@ -97,7 +97,7 @@ export default async function HomePage() {
             </section>
 
             {/* Chapter Connection Section */}
-            <section className="section bg-white">
+            <section className="section">
                 <div className="container">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <div>
@@ -143,13 +143,13 @@ export default async function HomePage() {
             </section>
 
             {/* CTA Section */}
-            <section className="section bg-gradient-to-br from-primary-700 to-accent-700 text-white">
+            <section className="section bg-primary-600">
                 <div className="container">
                     <div className="max-w-3xl mx-auto text-center space-y-6">
-                        <h2 className="text-3xl md:text-4xl font-bold">
+                        <h2 className="text-3xl md:text-4xl font-bold text-white">
                             Know a Resource Your Fellow Chapters Should See?
                         </h2>
-                        <p className="text-xl text-primary-50">
+                        <p className="text-xl text-primary-100">
                             Help strengthen our community by suggesting new resources, tools, or opportunities
                         </p>
                         <Link href="/suggest">

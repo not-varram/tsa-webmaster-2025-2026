@@ -19,15 +19,15 @@ export default async function EventsPage() {
     const pastEvents = events.filter((e) => new Date(e.startDatetime) <= new Date());
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-accent-50">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="wtsa-header-gradient text-white py-16">
-                <div className="container">
+            <section className="page-header-accent py-16 relative">
+                <div className="container relative z-10">
                     <div className="max-w-3xl">
                         <div className="flex items-center gap-3 mb-4">
-                            <h1 className="text-4xl md:text-5xl font-bold">Events & Programs</h1>
+                            <h1 className="text-4xl md:text-5xl font-bold text-neutral-900">Events & Programs</h1>
                         </div>
-                        <p className="text-xl text-accent-50">
+                        <p className="text-xl text-neutral-600">
                             Workshops, competitions, training sessions, and community events designed to support
                             your TSA journey and strengthen chapter connections.
                         </p>

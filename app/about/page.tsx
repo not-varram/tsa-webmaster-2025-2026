@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="wtsa-header-gradient text-white py-20">
-                <div className="container">
+            <section className="page-header-accent py-20 relative">
+                <div className="container relative z-10">
                     <div className="max-w-4xl mx-auto text-center">
-                        <h1 className="text-4xl md:text-6xl font-bold mb-6">About WTSA Coalesce</h1>
-                        <p className="text-2xl text-primary-50">
+                        <h1 className="text-4xl md:text-6xl font-bold mb-6 text-neutral-900">About WTSA Coalesce</h1>
+                        <p className="text-2xl text-neutral-600">
                             Building Unity Through Community across Washington TSA
                         </p>
                     </div>
@@ -26,7 +26,7 @@ export default function AboutPage() {
                 <div className="container">
                     <div className="max-w-4xl mx-auto space-y-12">
                         {/* The Problem */}
-                        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm">
+                        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-neutral-200">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
                                     <Target className="w-6 h-6 text-accent-600" />
@@ -45,7 +45,7 @@ export default function AboutPage() {
                         </div>
 
                         {/* The Solution */}
-                        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm">
+                        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-neutral-200">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
                                     <Lightbulb className="w-6 h-6 text-primary-600" />
@@ -76,7 +76,7 @@ export default function AboutPage() {
                         </div>
 
                         {/* Unity Through Community */}
-                        <div className="bg-gradient-to-br from-primary-600 to-accent-600 rounded-2xl p-8 md:p-12 text-white shadow-xl">
+                        <div className="bg-primary-600 rounded-2xl p-8 md:p-12 text-white shadow-xl">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                                     <Heart className="w-6 h-6 text-white" />
@@ -95,7 +95,7 @@ export default function AboutPage() {
                         </div>
 
                         {/* How It Works */}
-                        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm">
+                        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-neutral-200">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
                                     <Users className="w-6 h-6 text-primary-600" />

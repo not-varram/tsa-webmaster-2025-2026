@@ -51,19 +51,19 @@ export default function SignInPage() {
 	}
 
 	return (
-		<div className="min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+		<div className="min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
 			<div className="w-full max-w-md">
 				{/* Logo/Header */}
 				<div className="text-center mb-8">
-					<div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-600 to-accent-600 rounded-2xl text-white font-bold text-2xl mb-4 shadow-lg">
+					<div className="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-2xl text-white font-bold text-2xl mb-4 shadow-lg">
 						W
 					</div>
-					<h1 className="text-3xl font-bold text-gray-900">Welcome back</h1>
-					<p className="mt-2 text-gray-600">Sign in to your WTSA Coalesce account</p>
+					<h1 className="text-3xl font-bold text-neutral-900">Welcome back</h1>
+					<p className="mt-2 text-neutral-600">Sign in to your WTSA Coalesce account</p>
 				</div>
 
 				{/* Form Card */}
-				<div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-white/20">
+				<div className="bg-white rounded-2xl shadow-xl p-8 border border-neutral-200">
 					<form onSubmit={handleSubmit} className="space-y-6">
 						{error && (
 							<div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
@@ -73,7 +73,7 @@ export default function SignInPage() {
 
 						{/* Email */}
 						<div>
-							<label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+							<label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">
 								Email address
 							</label>
 							<input
@@ -83,14 +83,14 @@ export default function SignInPage() {
 								required
 								value={formData.email}
 								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-								className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
+								className="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
 								placeholder="you@example.com"
 							/>
 						</div>
 
 						{/* Password */}
 						<div>
-							<label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+							<label htmlFor="password" className="block text-sm font-medium text-neutral-700 mb-1">
 								Password
 							</label>
 							<div className="relative">
@@ -101,13 +101,13 @@ export default function SignInPage() {
 									required
 									value={formData.password}
 									onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-									className="w-full px-4 py-3 pr-12 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
+									className="w-full px-4 py-3 pr-12 rounded-lg border border-neutral-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
 									placeholder="••••••••"
 								/>
 								<button
 									type="button"
 									onClick={() => setShowPassword(!showPassword)}
-									className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+									className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700"
 								>
 									{showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
 								</button>
@@ -118,7 +118,7 @@ export default function SignInPage() {
 						<button
 							type="submit"
 							disabled={isLoading}
-							className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-accent-700 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+							className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
 						>
 							{isLoading ? (
 								<Loader2 className="w-5 h-5 animate-spin" />
@@ -132,7 +132,7 @@ export default function SignInPage() {
 					</form>
 
 					{/* Sign Up Link */}
-					<p className="mt-6 text-center text-sm text-gray-600">
+					<p className="mt-6 text-center text-sm text-neutral-600">
 						Don&apos;t have an account?{' '}
 						<Link href="/sign-up" className="font-semibold text-primary-600 hover:text-primary-700">
 							Create one
@@ -141,11 +141,10 @@ export default function SignInPage() {
 				</div>
 
 				{/* Footer Note */}
-				<p className="mt-6 text-center text-xs text-gray-500">
+				<p className="mt-6 text-center text-xs text-neutral-500">
 					Contact your chapter admin if you need help accessing your account.
 				</p>
 			</div>
 		</div>
 	)
 }
-
