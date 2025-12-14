@@ -53,12 +53,6 @@ export default async function ChaptersPage() {
                             </div>
                             <div className="text-neutral-600">Regions</div>
                         </div>
-                        <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-neutral-200">
-                            <div className="text-4xl font-bold text-primary-600 mb-2">
-                                {await prisma.mentorPair.count({ where: { status: 'ACTIVE' } })}
-                            </div>
-                            <div className="text-neutral-600">Active Mentor Pairs</div>
-                        </div>
                     </div>
 
                     {/* Chapters by Region */}

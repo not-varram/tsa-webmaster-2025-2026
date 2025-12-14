@@ -8,7 +8,6 @@ type Chapter = {
     schoolName: string;
     city: string;
     region: string;
-    focusTags: string[];
 };
 
 export function ChapterCard({ chapter }: { chapter: Chapter }) {
@@ -24,20 +23,6 @@ export function ChapterCard({ chapter }: { chapter: Chapter }) {
                         <MapPin className="w-4 h-4" />
                         <span>{chapter.city}, {chapter.region}</span>
                     </div>
-
-                    {/* Focus tags */}
-                    {chapter.focusTags.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5">
-                            {chapter.focusTags.slice(0, 4).map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-50 text-primary-700 border border-primary-200"
-                                >
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-                    )}
 
                     {/* View profile CTA */}
                     <div className="pt-2">

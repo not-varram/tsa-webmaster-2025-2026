@@ -42,11 +42,6 @@ enum SuggestionStatus {
   REJECTED
 }
 
-enum MentorPairStatus {
-  ACTIVE
-  INACTIVE
-}
-
 enum RequestStatus {
   PENDING
   APPROVED
@@ -123,15 +118,12 @@ model Chapter {
   city       String
   region     String
   about      String   @db.Text
-  focusTags  String[]
   latitude   Float?
   longitude  Float?
   adminEmails String[] // Emails of chapter admins who can manage this chapter
   
   users              User[]
   resources          Resource[]
-  mentorPairs        MentorPair[]       @relation("MentorChapter")
-  menteePairs        MentorPair[]       @relation("MenteeChapter")
   requestsMade       ResourceRequest[]  @relation("RequestingChapter")
   requestsReceived   ResourceRequest[]  @relation("OwningChapter")
   resourcePosts      ResourcePost[]
@@ -210,24 +202,6 @@ model Event {
 
   @@index([slug])
   @@index([startDatetime])
-}
-
-model MentorPair {
-  id               String            @id @default(cuid())
-  mentorChapterId  String
-  menteeChapterId  String
-  status           MentorPairStatus  @default(ACTIVE)
-  notes            String?           @db.Text
-  
-  mentorChapter Chapter @relation("MentorChapter", fields: [mentorChapterId], references: [id])
-  menteeChapter Chapter @relation("MenteeChapter", fields: [menteeChapterId], references: [id])
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([mentorChapterId])
-  @@index([menteeChapterId])
-  @@index([status])
 }
 
 model ResourceRequest {

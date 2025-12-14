@@ -53,21 +53,6 @@ export default async function ChapterDetailPage({ params }: Props) {
         notFound();
     }
 
-    // Get mentor relationships
-    const mentorPairs = await prisma.mentorPair.findMany({
-        where: {
-            OR: [
-                { mentorChapterId: chapter.id },
-                { menteeChapterId: chapter.id },
-            ],
-            status: 'ACTIVE',
-        },
-        include: {
-            mentorChapter: true,
-            menteeChapter: true,
-        },
-    });
-
     return (
         <div className="min-h-screen bg-neutral-50">
             {/* Header */}
@@ -125,57 +110,8 @@ export default async function ChapterDetailPage({ params }: Props) {
                             )}
                         </div>
 
-                        {/* Sidebar */}
-                        <div className="space-y-6">
-                            {/* Focus Areas */}
-                            {chapter.focusTags.length > 0 && (
-                                <div className="bg-white rounded-xl p-6 shadow-sm">
-                                    <h3 className="font-semibold text-lg text-neutral-900 mb-4">Focus Areas</h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        {chapter.focusTags.map((tag) => (
-                                            <span
-                                                key={tag}
-                                                className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary-100 text-primary-800 border border-primary-200"
-                                            >
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Mentor/Mentee Relationships */}
-                            {mentorPairs.length > 0 && (
-                                <div className="bg-white rounded-xl p-6 shadow-sm">
-                                    <h3 className="font-semibold text-lg text-neutral-900 mb-4">
-                                        Community Connections
-                                    </h3>
-                                    <div className="space-y-3">
-                                        {mentorPairs.map((pair) => {
-                                            const isMentor = pair.mentorChapterId === chapter.id;
-                                            const otherChapter = isMentor ? pair.menteeChapter : pair.mentorChapter;
-
-                                            return (
-                                                <div key={pair.id} className="flex items-start gap-3">
-                                                    <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${isMentor ? 'bg-accent-500' : 'bg-primary-500'}`}></div>
-                                                    <div>
-                                                        <div className="text-xs text-neutral-500 mb-1">
-                                                            {isMentor ? 'Mentoring' : 'Learning from'}
-                                                        </div>
-                                                        <Link
-                                                            href={`/chapters/${otherChapter.slug}`}
-                                                            className="text-sm font-medium text-primary-600 hover:text-primary-700"
-                                                        >
-                                                            {otherChapter.name}
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            )}
-                        </div>
+                        {/* Sidebar placeholder for future chapter details */}
+                        <div className="space-y-6"></div>
                     </div>
                 </div>
             </section>
