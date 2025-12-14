@@ -45,6 +45,7 @@ export async function PATCH(request: NextRequest) {
 			role: user.role,
 			chapterId: user.chapterId,
 			verificationStatus: user.verificationStatus,
+			tokenVersion: user.tokenVersion,
 		})
 		
 		await setAuthCookie(token)

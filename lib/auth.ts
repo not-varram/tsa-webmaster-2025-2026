@@ -4,8 +4,16 @@ import bcrypt from 'bcryptjs'
 import prisma from './db'
 import { UserRole, VerificationStatus } from '@prisma/client'
 
+// CRITICAL: JWT_SECRET must be set in production
+const JWT_SECRET_STRING = process.env.JWT_SECRET
+if (!JWT_SECRET_STRING || JWT_SECRET_STRING.length < 32) {
+	if (process.env.NODE_ENV === 'production') {
+		throw new Error('JWT_SECRET environment variable must be set and at least 32 characters in production')
+	}
+	console.warn('⚠️ WARNING: JWT_SECRET not set or too short. Using development fallback. DO NOT USE IN PRODUCTION.')
+}
 const JWT_SECRET = new TextEncoder().encode(
-	process.env.JWT_SECRET || 'your-secret-key-change-in-production'
+	JWT_SECRET_STRING || 'dev-only-secret-key-minimum-32-chars'
 )
 const COOKIE_NAME = 'auth_token'
 const TOKEN_EXPIRY = '7d'
@@ -17,6 +25,7 @@ export type SessionUser = {
 	role: UserRole
 	chapterId: string | null
 	verificationStatus: VerificationStatus
+	tokenVersion: number // Used to invalidate sessions on password change
 }
 
 /**
@@ -45,6 +54,7 @@ export async function createToken(user: SessionUser): Promise<string> {
 		role: user.role,
 		chapterId: user.chapterId,
 		verificationStatus: user.verificationStatus,
+		tokenVersion: user.tokenVersion,
 	})
 		.setProtectedHeader({ alg: 'HS256' })
 		.setIssuedAt()
@@ -89,6 +99,38 @@ export async function getCurrentUser() {
 	})
 
 	return user
+}
+
+/**
+ * Verify session is still valid by checking tokenVersion against DB
+ * This ensures sessions are invalidated after password changes
+ */
+export async function verifySessionFresh(): Promise<SessionUser | null> {
+	const session = await getSession()
+	if (!session) return null
+
+	// Check if tokenVersion matches the DB (for critical operations)
+	const user = await prisma.user.findUnique({
+		where: { id: session.id },
+		select: { tokenVersion: true },
+	})
+
+	if (!user || user.tokenVersion !== session.tokenVersion) {
+		// Token version mismatch - session has been invalidated
+		return null
+	}
+
+	return session
+}
+
+/**
+ * Invalidate all existing sessions for a user by incrementing tokenVersion
+ */
+export async function invalidateUserSessions(userId: string): Promise<void> {
+	await prisma.user.update({
+		where: { id: userId },
+		data: { tokenVersion: { increment: 1 } },
+	})
 }
 
 /**
@@ -206,13 +248,14 @@ export async function resetStudentPassword(studentId: string): Promise<string> {
 }
 
 /**
- * Generate a temporary password
+ * Generate a cryptographically secure temporary password
  */
 function generateTempPassword(): string {
 	const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789'
+	const randomBytes = crypto.getRandomValues(new Uint8Array(12))
 	let password = ''
 	for (let i = 0; i < 12; i++) {
-		password += chars.charAt(Math.floor(Math.random() * chars.length))
+		password += chars.charAt(randomBytes[i] % chars.length)
 	}
 	return password
 }

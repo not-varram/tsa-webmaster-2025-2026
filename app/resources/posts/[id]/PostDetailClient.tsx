@@ -356,10 +356,15 @@ export function PostDetailClient({
 								<p className="whitespace-pre-wrap">{post.description}</p>
 							</div>
 							
-							{/* Filled by contact info (only for author) */}
-							{isFilled && isAuthor && post.contactName && (
+							{/* Filled by contact info (visible to author and admins) */}
+							{isFilled && (isAuthor || isAdmin) && post.contactName && (
 								<div className="p-5 bg-green-50 border border-green-200 rounded-xl mb-8">
-									<h3 className="font-semibold text-green-900 mb-3">Contact Information</h3>
+									<h3 className="font-semibold text-green-900 mb-3">
+										Contact Information
+										{isAdmin && !isAuthor && (
+											<span className="ml-2 text-xs font-normal text-green-700">(Admin view)</span>
+										)}
+									</h3>
 									<div className="space-y-2 text-sm text-green-800">
 										<div className="flex items-center gap-2">
 											<User className="w-4 h-4" />

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/db'
-import { getSession, verifyPassword, hashPassword } from '@/lib/auth'
+import { getSession, verifyPassword, hashPassword, createToken, setAuthCookie } from '@/lib/auth'
 import { z } from 'zod'
 
 const changePasswordSchema = z.object({
@@ -47,17 +47,33 @@ export async function POST(request: NextRequest) {
 			)
 		}
 
-		// Hash and update new password
+		// Hash and update new password, increment tokenVersion to invalidate old sessions
 		const hashedPassword = await hashPassword(newPassword)
 
-		await prisma.user.update({
+		const updatedUser = await prisma.user.update({
 			where: { id: session.id },
-			data: { password: hashedPassword },
+			data: {
+				password: hashedPassword,
+				tokenVersion: { increment: 1 }, // Invalidate all existing sessions
+			},
+			include: { chapter: true },
 		})
+
+		// Issue new token with updated tokenVersion so current session remains valid
+		const newToken = await createToken({
+			id: updatedUser.id,
+			email: updatedUser.email,
+			name: updatedUser.name,
+			role: updatedUser.role,
+			chapterId: updatedUser.chapterId,
+			verificationStatus: updatedUser.verificationStatus,
+			tokenVersion: updatedUser.tokenVersion,
+		})
+		await setAuthCookie(newToken)
 
 		return NextResponse.json({
 			success: true,
-			message: 'Password changed successfully',
+			message: 'Password changed successfully. All other sessions have been logged out.',
 		})
 	} catch (error) {
 		console.error('Change password error:', error)

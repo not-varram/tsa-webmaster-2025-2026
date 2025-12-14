@@ -78,6 +78,7 @@ export async function POST(request: NextRequest) {
 			role: user.role,
 			chapterId: user.chapterId,
 			verificationStatus: user.verificationStatus,
+			tokenVersion: user.tokenVersion,
 		})
 
 		// Set auth cookie

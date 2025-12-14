@@ -1,21 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { jwtVerify } from 'jose'
 
+// Must match lib/auth.ts - production requires JWT_SECRET env var
+const JWT_SECRET_STRING = process.env.JWT_SECRET
+if (!JWT_SECRET_STRING || JWT_SECRET_STRING.length < 32) {
+	throw new Error('JWT_SECRET environment variable must be set and at least 32 characters in production')
+}
 const JWT_SECRET = new TextEncoder().encode(
-	process.env.JWT_SECRET || 'your-secret-key-change-in-production'
+	JWT_SECRET_STRING || 'dev-only-secret-key-minimum-32-chars'
 )
 const COOKIE_NAME = 'auth_token'
 
 // Routes that require authentication
 const protectedRoutes = [
 	'/dashboard',
+	'/profile',
 	'/api/admin',
+	'/api/auth/change-password',
+	'/api/auth/update-profile',
 ]
 
-// Routes that require verified user status
+// Routes that require verified user status (authenticated + verified)
 const verifiedRoutes = [
 	'/forum/new',
 	'/api/forum/threads',
+	'/api/posts', // POST requires verification (GET is public for approved posts)
 ]
 
 export async function middleware(request: NextRequest) {

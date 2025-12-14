@@ -85,9 +85,9 @@ export async function GET(request: NextRequest) {
 			orderBy: { createdAt: 'desc' },
 		})
 		
-		// For "my posts", include contact info for fulfilled posts
-		// This info should only be visible to the original poster
-		const postsWithContactInfo = myPosts ? posts : posts.map((post) => ({
+		// Contact info visible to: original poster, chapter admins, WTSA admins
+		const isAdmin = session?.role === 'ADMIN' || session?.role === 'CHAPTER_ADMIN'
+		const postsWithContactInfo = (myPosts || isAdmin) ? posts : posts.map((post) => ({
 			...post,
 			contactName: null,
 			contactEmail: null,

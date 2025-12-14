@@ -77,6 +77,7 @@ model User {
   role         UserRole           @default(STUDENT)
   chapterId    String?
   chapter      Chapter?           @relation(fields: [chapterId], references: [id])
+  tokenVersion Int                @default(0) // Increment to invalidate all existing sessions
   
   // Verification system for students
   verificationStatus VerificationStatus @default(PENDING)

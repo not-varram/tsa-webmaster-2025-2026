@@ -4,13 +4,14 @@ import { getSession, hashPassword } from '@/lib/auth'
 import { UserRole } from '@prisma/client'
 
 /**
- * Generate a secure temporary password
+ * Generate a cryptographically secure temporary password
  */
 function generateTempPassword(): string {
 	const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%'
+	const randomBytes = crypto.getRandomValues(new Uint8Array(12))
 	let password = ''
 	for (let i = 0; i < 12; i++) {
-		password += chars.charAt(Math.floor(Math.random() * chars.length))
+		password += chars.charAt(randomBytes[i] % chars.length)
 	}
 	return password
 }
@@ -64,10 +65,13 @@ export async function POST(
 		const tempPassword = generateTempPassword()
 		const hashedPassword = await hashPassword(tempPassword)
 
-		// Update password
+		// Update password and invalidate all existing sessions
 		await prisma.user.update({
 			where: { id: studentId },
-			data: { password: hashedPassword },
+			data: {
+				password: hashedPassword,
+				tokenVersion: { increment: 1 }, // Invalidate all existing sessions
+			},
 		})
 
 		// Return the temporary password (admin will share this with the student)
