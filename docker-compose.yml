@@ -1,0 +1,7 @@
+services:
+  app:
+    image: ghcr.io/not-varram/tsa2025:latest
+    ports:
+      - "3381:3000"
+    restart: unless-stopped
+

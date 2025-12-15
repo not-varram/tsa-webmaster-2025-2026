@@ -10,15 +10,8 @@ type Props = {
     };
 };
 
-export async function generateStaticParams() {
-    const chapters = await prisma.chapter.findMany({
-        select: { slug: true },
-    });
-
-    return chapters.map((chapter) => ({
-        slug: chapter.slug,
-    }));
-}
+// Force dynamic rendering - no DB at build time
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: Props) {
     const chapter = await prisma.chapter.findUnique({
