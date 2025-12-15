@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect, useCallback } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import { Menu, X, LogOut, User, LayoutDashboard, Clock, ChevronDown } from 'lucide-react'
 
 const navigation = [
@@ -27,6 +27,7 @@ type AuthUser = {
 
 export function Header() {
 	const router = useRouter()
+	const pathname = usePathname()
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	const [userMenuOpen, setUserMenuOpen] = useState(false)
 	const [user, setUser] = useState<AuthUser>(null)
@@ -64,20 +65,32 @@ export function Header() {
 		return () => clearInterval(interval)
 	}, [])
 
-	useEffect(() => {
-		async function fetchUser() {
-			try {
-				const res = await fetch('/api/auth/me')
-				const data = await res.json()
-				setUser(data.user)
-			} catch (err) {
-				console.error('Failed to fetch user:', err)
-			} finally {
-				setLoading(false)
-			}
+	const fetchUser = useCallback(async () => {
+		try {
+			setLoading(true)
+			const res = await fetch('/api/auth/me', {
+				cache: 'no-store',
+				credentials: 'include',
+				next: { revalidate: 0 },
+			})
+			const data = await res.json()
+			setUser(data.user)
+		} catch (err) {
+			console.error('Failed to fetch user:', err)
+		} finally {
+			setLoading(false)
 		}
-		fetchUser()
 	}, [])
+
+	useEffect(() => {
+		fetchUser()
+	}, [fetchUser, pathname])
+
+	useEffect(() => {
+		const handler = () => fetchUser()
+		window.addEventListener('auth-changed', handler)
+		return () => window.removeEventListener('auth-changed', handler)
+	}, [fetchUser])
 
 	const handleSignOut = async () => {
 		try {

@@ -70,19 +70,20 @@ export async function POST(request: NextRequest) {
 			},
 		})
 
-		// Create session token
-		const token = await createToken({
-			id: user.id,
-			email: user.email,
-			name: user.name,
-			role: user.role,
-			chapterId: user.chapterId,
-			verificationStatus: user.verificationStatus,
-			tokenVersion: user.tokenVersion,
-		})
+		// Only set auth cookie if user is auto-approved (admins). Pending students must sign in after approval.
+		if (user.verificationStatus === VerificationStatus.APPROVED) {
+			const token = await createToken({
+				id: user.id,
+				email: user.email,
+				name: user.name,
+				role: user.role,
+				chapterId: user.chapterId,
+				verificationStatus: user.verificationStatus,
+				tokenVersion: user.tokenVersion,
+			})
 
-		// Set auth cookie
-		await setAuthCookie(token)
+			await setAuthCookie(token)
+		}
 
 		return NextResponse.json({
 			success: true,
@@ -95,7 +96,7 @@ export async function POST(request: NextRequest) {
 			},
 			message: isChapterAdmin
 				? 'Account created. You are registered as a chapter admin.'
-				: 'Account created. Pending verification by your chapter admin.',
+				: 'Account created. Pending verification by your chapter admin. You can sign in once approved.',
 		})
 	} catch (error) {
 		console.error('Sign-up error:', error)

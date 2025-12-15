@@ -5,7 +5,7 @@ const quickLinks = [
     { name: 'Resource Hub', href: '/resources' },
     { name: 'Chapters', href: '/chapters' },
     { name: 'Events', href: '/events' },
-    { name: 'Student Work Log', href: '/student-work-log' },
+    // { name: 'Student Work Log', href: '/student-work-log' },
     { name: 'Copyright Checklist', href: '/copyright-checklist' },
 ];
 
@@ -30,8 +30,7 @@ export function Footer() {
                             </span>
                         </div>
                         <p className="text-neutral-400 text-sm leading-relaxed">
-                            Unity Through Community: Connecting Washington TSA chapters through shared
-                            resources, mentorship, and collaboration.
+                            Unity Through Community: Connecting Washington TSA chapters through shared resources.
                         </p>
                     </div>
 
@@ -56,18 +55,18 @@ export function Footer() {
                     <div>
                         <h3 className="font-semibold text-lg mb-4">Contact</h3>
                         <div className="space-y-2 text-sm text-neutral-400">
-                            <p>Washington TSA</p>
+                            <p>Developers</p>
                             <p>
                                 <a
-                                    href="mailto:info@watsa.org"
+                                    href="mailto:sigmasociety420@gmail.com"
                                     className="hover:text-white transition-colors"
                                 >
-                                    info@watsa.org
+                                    sigmasociety420@gmail.com
                                 </a>
                             </p>
                             <div className="pt-4">
                                 <p className="text-xs text-neutral-500">
-                                    © {new Date().getFullYear()} Washington TSA. All rights reserved.
+                                    Copyright {new Date().getFullYear()} Washington TSA & LWHS Developers.
                                 </p>
                                 <p className="text-xs text-neutral-500 mt-1">
                                     Built for the 2025-2026 TSA Webmaster Competition

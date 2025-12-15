@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/db'
-import { getSession, isVerifiedUser } from '@/lib/auth'
+import { getSession } from '@/lib/auth'
 import { PostStatus, PostType } from '@prisma/client'
 
 const POST_CATEGORIES = [
@@ -118,14 +118,29 @@ export async function POST(request: NextRequest) {
 				{ status: 401 }
 			)
 		}
-		
-		const isVerified = await isVerifiedUser()
-		if (!isVerified) {
-			return NextResponse.json(
-				{ error: 'Your account must be verified to create posts' },
-				{ status: 403 }
-			)
-		}
+
+			// Always check latest verification status from DB (avoid stale tokens)
+			const dbUser = await prisma.user.findUnique({
+				where: { id: session.id },
+				select: { verificationStatus: true, role: true, chapterId: true },
+			})
+
+			if (!dbUser) {
+				return NextResponse.json(
+					{ error: 'User not found' },
+					{ status: 401 }
+				)
+			}
+
+			const isAdminRole = session.role === 'ADMIN' || session.role === 'CHAPTER_ADMIN'
+			const isVerified = isAdminRole || dbUser.verificationStatus === 'APPROVED'
+
+			if (!isVerified) {
+				return NextResponse.json(
+					{ error: 'Your account must be verified to create posts' },
+					{ status: 403 }
+				)
+			}
 		
 		const body = await request.json()
 		const { title, description, type, category, tags } = body
@@ -171,7 +186,7 @@ export async function POST(request: NextRequest) {
 				category,
 				tags: tags || [],
 				authorId: session.id,
-				chapterId: session.chapterId,
+				chapterId: dbUser.chapterId,
 				status: isAdmin ? PostStatus.APPROVED : PostStatus.PENDING,
 				reviewedById: isAdmin ? session.id : undefined,
 				reviewedAt: isAdmin ? new Date() : undefined,

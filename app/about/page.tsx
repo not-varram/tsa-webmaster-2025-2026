@@ -28,37 +28,29 @@ export default function AboutPage() {
                         {/* The Problem */}
                         <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-neutral-200">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
-                                    <Target className="w-6 h-6 text-accent-600" />
-                                </div>
                                 <h2 className="text-3xl font-bold text-neutral-900">The Challenge We Saw</h2>
                             </div>
                             <p className="text-lg text-neutral-700 leading-relaxed mb-4">
-                            Many TSA chapters across Washington operate with uneven access to resources and support. Some chapters are underfunded or lack essential materials to run competitive projects, while others have surplus equipment in certain areas but fall short in others.
+                            Many TSA chapters across Washington (ours included) operate with uneven access to outside resources and support. Some chapters lack funding or essential materials to support their students, while others have them in surplus without a way to share.
                             </p>
                             <p className="text-lg text-neutral-700 leading-relaxed">
-                            This imbalance, combined with limited access to experienced mentorship, leaves many chapters rebuilding from scratch and missing opportunities for collaboration and growth.
+                            This imbalance makes it very difficult for new and existing chapters to operate smoothly and to provide the best experience for their members. We experienced this previously in the inaural year of the LWHS TSA chapter, where we struggled to find resources, funding, and mentorship to get started.
                             </p>
                         </div>
 
                         {/* The Solution */}
                         <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-neutral-200">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                                    <Lightbulb className="w-6 h-6 text-primary-600" />
-                                </div>
                                 <h2 className="text-3xl font-bold text-neutral-900">Our Solution</h2>
                             </div>
                             <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-                                The WTSA Community Resource Hub breaks down these barriers by creating a central
-                                place where:
+                                Coalesce is a Community Resource Hub built for WTSA that breaks down these barriers by creating place where:
                             </p>
                             <ul className="space-y-4">
                                 {[
-                                    'Chapters can discover and access resources created by WTSA and fellow chapters',
-                                    'Students and advisors can find exactly what they need through powerful search and filtering',
-                                    'New or struggling chapters can connect with mentors through our buddy program',
-                                    'Anyone can contribute by suggesting new resources to help the community grow',
+                                    'Chapters can find and access resources created by WTSA and fellow chapters',
+                                    'Students and advisors can find exactly what they need through search and filtering',
+                                    'New or struggling chapters can connect with existing ones through resource postings',
                                 ].map((item) => (
                                     <li key={item} className="flex items-start gap-3">
                                         <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -81,22 +73,13 @@ export default function AboutPage() {
                                 <h2 className="text-3xl font-bold">Unity Through Community</h2>
                             </div>
                             <p className="text-lg text-primary-50 leading-relaxed mb-4">
-                                This isn't just a website—it's a embodiment of our theme. When chapters share their
-                                best resources, experienced teams mentor newcomers, and students across the state
-                                learn from each other's successes, we create something bigger than any single chapter.
-                            </p>
-                            <p className="text-lg text-primary-50 leading-relaxed">
-                                We create a unified WTSA community where every chapter, regardless of size or
-                                location, has access to the support and resources they need to thrive.
+                                This website is designed with the annual WTSA theme, "Unity Through Community," in mind. 
                             </p>
                         </div>
 
                         {/* How It Works */}
                         <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-neutral-200">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                                    <Users className="w-6 h-6 text-primary-600" />
-                                </div>
                                 <h2 className="text-3xl font-bold text-neutral-900">How It Works</h2>
                             </div>
 
@@ -110,8 +93,8 @@ export default function AboutPage() {
                                             Browse the Resource Directory
                                         </h3>
                                         <p className="text-neutral-700">
-                                            Search and filter hundreds of templates, guides, workshops, and tools shared by
-                                            WTSA and chapters statewide.
+                                            Search through guides, workshops, and tools shared by
+                                            WTSA and individual chapters around the state.
                                         </p>
                                     </div>
                                 </div>
@@ -125,8 +108,7 @@ export default function AboutPage() {
                                             Connect with Chapters
                                         </h3>
                                         <p className="text-neutral-700">
-                                            Explore chapter profiles to see what others are working on, find mentorship
-                                            opportunities, and build relationships.
+                                            Browse through active chapter profiles on the platform, find mentorship and communal resources & opportunities .
                                         </p>
                                     </div>
                                 </div>
@@ -140,27 +122,13 @@ export default function AboutPage() {
                                             Share & Contribute
                                         </h3>
                                         <p className="text-neutral-700">
-                                            Help the community grow by suggesting new resources or having your chapter share
-                                            what's working for you.
+                                            Help the community by contributing both physical and digital resources through the submission form. Students around the state can request to use these resources for their own chapters.
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* For Judges Note */}
-                        <div className="bg-neutral-100 border-2 border-neutral-300 rounded-xl p-6">
-                            <p className="text-neutral-700">
-                                <strong className="text-neutral-900">For Competition Judges:</strong> This site
-                                fulfills the "Community Resource Hub" brief by providing an interactive directory,
-                                highlighting key resources, offering a suggestion form, and adding substantial value
-                                through chapter profiles, events calendar, and a mentorship program. See the{' '}
-                                <a href="/judges" className="text-primary-600 hover:text-primary-700 font-medium">
-                                    For Judges page
-                                </a>{' '}
-                                for technical details and compliance information.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </section>

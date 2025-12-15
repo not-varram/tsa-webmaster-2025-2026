@@ -56,6 +56,9 @@ export function CreatePostModal({ isOpen, onClose, onSuccess, isAdmin = false }:
 			const data = await res.json()
 			
 			if (!res.ok) {
+				if (res.status === 403) {
+					throw new Error('Your account must be verified to create posts. Please ask your chapter admin to approve you, then refresh the page.')
+				}
 				throw new Error(data.error || 'Failed to create post')
 			}
 			

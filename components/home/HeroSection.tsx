@@ -97,14 +97,13 @@ export function HeroSection() {
 					<div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
 						<Link href="/resources">
 							<Button size="lg" className="shadow-lg shadow-primary-500/25">
-								Explore Resources
+								Available Resources
 								<ArrowRight className="ml-2 w-5 h-5" />
 							</Button>
 						</Link>
 						<Link href="/chapters">
 							<Button size="lg" variant="outline" className="border-neutral-300 text-neutral-700 hover:bg-neutral-50">
-								Meet the Chapters
-								<Users className="ml-2 w-5 h-5" />
+								Registered Chapters
 							</Button>
 						</Link>
 					</div>

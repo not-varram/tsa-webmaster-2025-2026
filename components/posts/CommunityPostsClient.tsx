@@ -56,6 +56,25 @@ export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }
 	const [typeFilter, setTypeFilter] = useState<'' | 'REQUEST' | 'OFFERING'>('')
 	const [categoryFilter, setCategoryFilter] = useState('')
 	const [statusFilter, setStatusFilter] = useState<'APPROVED' | 'FILLED'>('APPROVED')
+	const [verified, setVerified] = useState(isVerified)
+
+	const refreshVerification = useCallback(async () => {
+		if (!isSignedIn) {
+			setVerified(false)
+			return
+		}
+		try {
+			const res = await fetch('/api/auth/me', {
+				cache: 'no-store',
+				credentials: 'include',
+				next: { revalidate: 0 },
+			})
+			const data = await res.json()
+			setVerified(data.user?.verificationStatus === 'APPROVED')
+		} catch (err) {
+			console.error('Failed to refresh verification status', err)
+		}
+	}, [isSignedIn])
 	
 	const fetchPosts = useCallback(async () => {
 		setIsLoading(true)
@@ -77,7 +96,8 @@ export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }
 	
 	useEffect(() => {
 		fetchPosts()
-	}, [fetchPosts])
+		refreshVerification()
+	}, [fetchPosts, refreshVerification])
 	
 	const requestCount = posts.filter((p) => p.type === 'REQUEST').length
 	const offeringCount = posts.filter((p) => p.type === 'OFFERING').length
@@ -99,7 +119,7 @@ export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }
 							My Posts
 						</Link>
 					)}
-					{isSignedIn && isVerified && (
+					{isSignedIn && verified && (
 						<Button onClick={() => setIsModalOpen(true)} className="shrink-0">
 							<Plus className="w-4 h-4 mr-2" />
 							Create Post
@@ -259,7 +279,7 @@ export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }
 								? 'No posts match your current filters.'
 								: 'Be the first to post a request or share a resource!'}
 					</p>
-					{statusFilter === 'APPROVED' && isSignedIn && isVerified && (
+					{statusFilter === 'APPROVED' && isSignedIn && verified && (
 						<Button onClick={() => setIsModalOpen(true)}>
 							<Plus className="w-4 h-4 mr-2" />
 							Create First Post
@@ -284,7 +304,7 @@ export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }
 			)}
 			
 			{/* Verification prompt for unverified users */}
-			{isSignedIn && !isVerified && (
+			{isSignedIn && !verified && (
 				<div className="bg-amber-50 rounded-xl p-6 border border-amber-200">
 					<h3 className="text-lg font-semibold text-neutral-900 mb-2">
 						Account Pending Verification

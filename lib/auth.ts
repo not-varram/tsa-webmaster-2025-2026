@@ -196,7 +196,13 @@ export async function isVerifiedUser(): Promise<boolean> {
 		return true
 	}
 
-	return session.verificationStatus === VerificationStatus.APPROVED
+	// Always check latest status from DB to avoid stale tokens
+	const user = await prisma.user.findUnique({
+		where: { id: session.id },
+		select: { verificationStatus: true },
+	})
+
+	return user?.verificationStatus === VerificationStatus.APPROVED
 }
 
 /**

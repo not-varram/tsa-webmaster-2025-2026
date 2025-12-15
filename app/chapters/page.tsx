@@ -32,8 +32,7 @@ export default async function ChaptersPage() {
                     <div className="max-w-3xl">
                         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">WTSA Chapters</h1>
                         <p className="text-xl text-neutral-600">
-                            Connect with TSA chapters across Washington. From Spokane to Seattle, discover what
-                            other chapters are working on and find mentorship opportunities.
+                            Connect with TSA chapters across Washington.
                         </p>
                     </div>
                 </div>

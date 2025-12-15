@@ -35,6 +35,11 @@ export default function SignInPage() {
 				return
 			}
 
+			// Notify other components (Header) to refetch user
+			if (typeof window !== 'undefined') {
+				window.dispatchEvent(new Event('auth-changed'))
+			}
+
 			// Redirect based on role
 			if (data.user.role === 'ADMIN') {
 				router.push('/dashboard/admin')

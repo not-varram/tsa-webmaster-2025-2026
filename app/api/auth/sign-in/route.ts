@@ -45,6 +45,14 @@ export async function POST(request: NextRequest) {
 			)
 		}
 
+		// Block sign-in if not approved
+		if (user.verificationStatus !== 'APPROVED') {
+			return NextResponse.json(
+				{ error: 'Your account is not approved yet. Please wait for your chapter admin to approve you.' },
+				{ status: 403 }
+			)
+		}
+
 		// Create session token
 		const token = await createToken({
 			id: user.id,
