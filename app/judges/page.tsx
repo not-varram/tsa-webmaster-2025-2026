@@ -26,10 +26,10 @@ export default function JudgesPage() {
                 <div className="container">
                     <div className="flex flex-wrap gap-4">
                         <Link href="/student-work-log">
-                            <Button variant="outline">
+                            {/* <Button variant="outline">
                                 <FileText className="w-4 h-4 mr-2" />
                                 Student Work Log
-                            </Button>
+                            </Button> */}
                         </Link>
                         <Link href="/copyright-checklist">
                             <Button variant="outline">

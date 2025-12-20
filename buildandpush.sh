@@ -1,0 +1,1 @@
+docker build -t ghcr.io/not-varram/tsa2025:latest . && docker push ghcr.io/not-varram/tsa2025:latest
