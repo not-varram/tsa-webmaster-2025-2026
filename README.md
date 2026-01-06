@@ -1,186 +1,195 @@
-# WTSA Community Resource Hub
+# WTSA Coalesce - Community Resource Hub
 
-**Unity Through Community** - A comprehensive resource platform connecting Washington TSA chapters.
+**Unity Through Community** — A comprehensive resource platform connecting Washington TSA chapters.
 
-## Project Overview
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql)](https://www.postgresql.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-5.20-2D3748?logo=prisma)](https://www.prisma.io/)
 
-The WTSA Community Resource Hub is a web application designed for the 2025-2026 TSA Webmaster competition. It fulfills the "Community Resource Hub" brief by providing an interactive directory of resources, highlighting key programs, enabling resource suggestions, and fostering collaboration among Washington TSA chapters.
+## Overview
 
-### Our Interpretation
+WTSA Coalesce is a web application built for the 2025-2026 TSA Webmaster competition. It fulfills the "Community Resource Hub" brief by providing an interactive directory of resources, community collaboration tools, and chapter networking capabilities for Washington TSA chapters.
 
-We interpreted "community" as the entire WTSA ecosystem—students, advisors, chapters, and the state organization. Our "residents" are the members who need access to resources, mentorship, and collaboration opportunities.
+### The Problem We Solve
+
+Many TSA chapters across Washington operate with uneven access to resources and support. Some chapters lack funding or essential materials, while others have them in surplus without a way to share. This imbalance makes it difficult for new and existing chapters to provide the best experience for their members.
+
+### Our Solution
+
+Coalesce creates a centralized platform where:
+- Chapters can discover and access resources from WTSA and fellow chapters
+- Students and advisors can search and filter to find exactly what they need
+- Members can request resources they need or offer materials to share
+- New chapters can connect with established ones for mentorship
 
 ## Features
 
-### Core Requirements (Competition Brief)
+### Core Functionality
+- **Interactive Resource Directory** — Searchable, filterable database with type, category, and audience filters
+- **Community Board** — Post resource requests or offerings; connect with other chapters
+- **Chapter Directory** — Browse all WTSA chapters organized by region
+- **Events Calendar** — View upcoming workshops, competitions, and training sessions
+- **Resource Suggestions** — Public form for contributing new resources
 
-1. **Interactive Resource Directory** - Searchable, filterable database of resources
-2. **Highlighted Resources** - Showcases 3+ important programs on the home page
-3. **Resource Suggestion Form** - Public form for contributing new resources
-4. **Additional Content** - Chapter profiles, Events, Mentor program
+### Authentication & Authorization
+- **Role-Based Access** — WTSA Admin, Chapter Admin, Student, and Public roles
+- **Student Verification** — Chapter admins verify student accounts before full access
+- **Secure Authentication** — JWT tokens with bcrypt password hashing
 
-### Pages
+### Admin Features
+- **WTSA Admin Dashboard** — Manage all chapters, view statistics
+- **Chapter Admin Dashboard** — Verify students, approve resource posts, manage chapter
 
-- **Home** - Hero, highlights, directory preview, chapter connections
-- **Resource Hub** - Full directory with search and filtering
-- **Chapters** - Directory of WTSA chapters with profiles
-- **Events** - Calendar of workshops, competitions, and training
-- **About** - Explanation of our solution and theme
-- **Suggest Resource** - Form to contribute resources
-- **For Judges** - Technical documentation and compliance information
-- **Student Work Log** - Detailed timeline of development tasks
-- **Copyright Checklist** - Complete attribution of all assets
+## Tech Stack
 
-## Technology Stack
+| Category | Technology |
+|----------|------------|
+| **Framework** | Next.js 14 (App Router) |
+| **Language** | TypeScript 5.6 |
+| **Styling** | Tailwind CSS 3.4 |
+| **Database** | PostgreSQL |
+| **ORM** | Prisma 5.20 |
+| **Authentication** | JWT (jose) + bcryptjs |
+| **Validation** | Zod + React Hook Form |
+| **Icons** | Lucide React |
 
-### Frontend
-- **Next.js 14** - React framework with App Router
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first styling
-- **Lucide React** - Icon library
-
-### Backend
-- **PostgreSQL** - Relational database
-- **Prisma ORM** - Type-safe database client
-- **Next.js API Routes** - Serverless API endpoints
-
-### Deployment
-- Production-ready build with static generation
-- Optimized for Vercel or similar platforms
-
-## Getting Started
+## Quick Start
 
 ### Prerequisites
-
-- Node.js 18+ and npm
+- Node.js 18+ (or pnpm)
 - PostgreSQL database
 
 ### Installation
 
-1. Clone the repository
 ```bash
+# Clone the repository
 git clone <repository-url>
 cd tsa-webmaster-2025-2026
-```
 
-2. Install dependencies
-```bash
-npm install
-```
+# Install dependencies
+pnpm install
 
-3. Set up environment variables
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your database credentials and JWT secret
 
-Create a `.env` file with your database credentials:
-```env
-DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
-```
-
-4. Set up the database
-```bash
-# Generate Prisma Client
-npm run db:generate
+# Generate Prisma client
+pnpm db:generate
 
 # Push schema to database
 npx prisma db push
 
-# Seed demo data
-npm run db:seed
+# Seed demo data (optional)
+pnpm db:seed
+
+# Start development server
+pnpm dev
 ```
 
-5. Start development server
-```bash
-npm run dev
-```
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-6. Open [http://localhost:3000](http://localhost:3000)
+### Test Accounts (after seeding)
+
+| Role | Email | Password |
+|------|-------|----------|
+| WTSA Admin | admin@wtsa.org | password123 |
+| Chapter Admin | admin@lwhs.edu | password123 |
+| Student | student@lwhs.edu | password123 |
 
 ## Project Structure
 
 ```
 tsa-webmaster-2025-2026/
-├── app/                    # Next.js app directory
-│   ├── page.tsx           # Home page
-│   ├── resources/         # Resource hub pages
-│   ├── chapters/          # Chapter directory pages
-│   ├── events/            # Events page
-│   ├── suggest/           # Suggestion form
-│   ├── judges/            # For judges page
-│   ├── student-work-log/  # Work log page
-│   ├── copyright-checklist/  # Copyright page
-│   └── api/               # API routes
-├── components/            # React components
-│   ├── ui/               # Base UI components
-│   ├── cards/            # Card components
-│   ├── layout/           # Layout components
-│   └── forms/            # Form components
-├── lib/                  # Utilities and database client
-├── prisma/               # Database schema and seed
-└── public/               # Static assets
+├── app/                      # Next.js App Router pages
+│   ├── (auth)/              # Authentication pages (sign-in, sign-up)
+│   ├── api/                 # API routes
+│   │   ├── admin/           # Admin-only endpoints
+│   │   ├── auth/            # Authentication endpoints
+│   │   ├── posts/           # Community board posts
+│   │   └── suggestions/     # Resource suggestions
+│   ├── chapters/            # Chapter directory
+│   ├── dashboard/           # Admin dashboards
+│   ├── events/              # Events calendar
+│   ├── profile/             # User profile
+│   ├── resources/           # Resource hub
+│   └── suggest/             # Suggestion form
+├── components/              # React components
+│   ├── cards/               # Card components
+│   ├── dashboard/           # Dashboard components
+│   ├── forms/               # Form components
+│   ├── home/                # Home page components
+│   ├── layout/              # Layout components (Header, Footer)
+│   ├── posts/               # Community board components
+│   ├── resources/           # Resource components
+│   └── ui/                  # Base UI components
+├── lib/                     # Utilities
+│   ├── auth.ts              # Authentication helpers
+│   ├── db.ts                # Prisma client
+│   └── utils.ts             # General utilities
+├── prisma/                  # Database
+│   ├── schema.prisma        # Database schema
+│   └── seed.ts              # Seed script
+├── public/                  # Static assets
+└── docs/                    # Documentation
 ```
 
 ## Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Create production build
-- `npm start` - Run production server
-- `npm run lint` - Run ESLint
-- `npm run type-check` - Type check with TypeScript
-- `npm run db:generate` - Generate Prisma Client
-- `npm run db:push` - Push schema to database
-- `npm run db:seed` - Seed database with demo data
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Create production build |
+| `pnpm start` | Run production server |
+| `pnpm lint` | Run ESLint |
+| `pnpm type-check` | Type check with TypeScript |
+| `pnpm db:generate` | Generate Prisma client |
+| `pnpm db:push` | Push schema to database |
+| `pnpm db:seed` | Seed database with demo data |
 
-## Database Schema
+## Documentation
 
-The application uses 6 main tables:
+Detailed documentation is available in the `/docs` directory:
 
-- **User** - User accounts (students, advisors, admins)
-- **Chapter** - TSA chapters with locations and details
-- **Resource** - Shared resources (guides, templates, tools)
-- **Suggestion** - Pending resource suggestions
-- **Event** - Workshops, competitions, training sessions
-- **MentorPair** - Mentor/mentee chapter relationships
-
-See `prisma/schema.prisma` for the complete schema.
+- [Architecture Overview](docs/ARCHITECTURE.md) — System design and technical decisions
+- [API Documentation](docs/API.md) — REST API endpoints
+- [Development Guide](docs/DEVELOPMENT.md) — Setup and development workflow
+- [Deployment Guide](docs/DEPLOYMENT.md) — Production deployment instructions
+- [Database Schema](docs/DATABASE.md) — Database models and relationships
 
 ## Competition Compliance
 
 This project fully complies with the TSA Webmaster competition requirements:
 
-✅ Interactive directory with search and filters  
-✅ At least 3 highlighted resources  
-✅ Public resource suggestion form  
-✅ Substantial additional content (chapters, events, mentorship)  
-✅ Student Work Log page  
-✅ Copyright Checklist page  
-✅ Responsive design (mobile, tablet, desktop)  
-✅ Accessibility-focused (WCAG AA)  
-✅ Cross-browser compatible
+- ✅ Interactive directory with search and filters
+- ✅ At least 3 highlighted resources on home page
+- ✅ Public resource suggestion form
+- ✅ Substantial additional content (chapters, events, community board)
+- ✅ Student Work Log page
+- ✅ Copyright Checklist page
+- ✅ Responsive design (mobile, tablet, desktop)
+- ✅ Accessibility-focused (WCAG AA)
+- ✅ Cross-browser compatible
 
 ## Accessibility
 
 - Semantic HTML5 elements throughout
-- WCAG AA color contrast
-- Keyboard navigation support
+- WCAG AA color contrast ratios
+- Full keyboard navigation support
 - Focus indicators on interactive elements
 - ARIA labels where appropriate
-- Responsive design (320px+)
+- Responsive design from 320px+
 
 ## Credits
 
-**Team Members:**
-- Full Stack Development
-- UI/UX Design
-- Content Writing
-- Database Design
-- QA & Testing
-
 **Technologies:**
-- Next.js by Vercel
-- React by Meta
-- Tailwind CSS by Tailwind Labs
-- Prisma by Prisma Data
-- Lucide Icons
-- Inter font by Google Fonts
+- [Next.js](https://nextjs.org/) by Vercel
+- [React](https://react.dev/) by Meta
+- [Tailwind CSS](https://tailwindcss.com/) by Tailwind Labs
+- [Prisma](https://prisma.io/) by Prisma Data
+- [Lucide Icons](https://lucide.dev/)
+- [DM Sans](https://fonts.google.com/specimen/DM+Sans) by Google Fonts
 
 **Competition:**
 - Technology Student Association (TSA)
