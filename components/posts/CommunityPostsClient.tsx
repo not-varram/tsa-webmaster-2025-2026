@@ -119,12 +119,22 @@ export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }
 							My Posts
 						</Link>
 					)}
-					{isSignedIn && verified && (
-						<Button onClick={() => setIsModalOpen(true)} className="shrink-0">
+				{isSignedIn && verified ? (
+					<Button onClick={() => setIsModalOpen(true)} className="shrink-0">
+						<Plus className="w-4 h-4 mr-2" />
+						Create Post
+					</Button>
+				) : (
+					<div className="disabled-tooltip inline-block" data-tooltip="You need to signup and be a part of the chapter to use this feature">
+						<Button 
+							disabled 
+							className="shrink-0 cursor-not-allowed opacity-60"
+						>
 							<Plus className="w-4 h-4 mr-2" />
 							Create Post
 						</Button>
-					)}
+					</div>
+				)}
 				</div>
 			</div>
 			
@@ -279,12 +289,24 @@ export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }
 								? 'No posts match your current filters.'
 								: 'Be the first to post a request or share a resource!'}
 					</p>
-					{statusFilter === 'APPROVED' && isSignedIn && verified && (
+				{statusFilter === 'APPROVED' && (
+					isSignedIn && verified ? (
 						<Button onClick={() => setIsModalOpen(true)}>
 							<Plus className="w-4 h-4 mr-2" />
 							Create First Post
 						</Button>
-					)}
+					) : (
+						<div className="disabled-tooltip inline-block" data-tooltip="You need to signup and be a part of the chapter to use this feature">
+							<Button 
+								disabled 
+								className="cursor-not-allowed opacity-60"
+							>
+								<Plus className="w-4 h-4 mr-2" />
+								Create First Post
+							</Button>
+						</div>
+					)
+				)}
 				</div>
 			)}
 			

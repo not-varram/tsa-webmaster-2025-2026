@@ -24,17 +24,27 @@ const protectedRoutes = [
 const verifiedRoutes = [
 	'/forum/new',
 	'/api/forum/threads',
-	'/api/posts', // POST requires verification (GET is public for approved posts)
+]
+
+// Routes that require verification only for certain methods
+const verifiedRoutesWithMethodCheck = [
+	{ path: '/api/posts', methods: ['POST'] }, // GET is public for approved posts
 ]
 
 export async function middleware(request: NextRequest) {
 	const { pathname } = request.nextUrl
+	const method = request.method
 
 	// Check if route requires authentication
 	const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route))
 	const isVerifiedRoute = verifiedRoutes.some(route => pathname.startsWith(route))
+	
+	// Check if route requires verification for specific methods
+	const methodSpecificRoute = verifiedRoutesWithMethodCheck.find(route => 
+		pathname.startsWith(route.path) && route.methods.includes(method)
+	)
 
-	if (!isProtectedRoute && !isVerifiedRoute) {
+	if (!isProtectedRoute && !isVerifiedRoute && !methodSpecificRoute) {
 		return NextResponse.next()
 	}
 
@@ -54,7 +64,7 @@ export async function middleware(request: NextRequest) {
 		const { payload } = await jwtVerify(token, JWT_SECRET)
 
 		// For verified routes, check verification status
-		if (isVerifiedRoute) {
+		if (isVerifiedRoute || methodSpecificRoute) {
 			const isAdmin = payload.role === 'ADMIN' || payload.role === 'CHAPTER_ADMIN'
 			const isVerified = payload.verificationStatus === 'APPROVED'
 

@@ -391,10 +391,11 @@ export function PostDetailClient({
 								</div>
 							)}
 							
-							{/* Fill request form */}
-							{isApproved && isSignedIn && isVerified && !isAuthor && isRequest && (
-								<div className="mb-8">
-									{showFillForm ? (
+						{/* Fill request form */}
+						{isApproved && !isAuthor && isRequest && (
+							<div className="mb-8">
+								{isSignedIn && isVerified ? (
+									showFillForm ? (
 										<form onSubmit={handleFillRequest} className="p-5 bg-emerald-50 border border-emerald-200 rounded-xl">
 											<h3 className="font-semibold text-emerald-900 mb-4">
 												Offer to Fill This Request
@@ -476,9 +477,20 @@ export function PostDetailClient({
 											<CheckCircle className="w-4 h-4 mr-2" />
 											I Can Help With This Request
 										</Button>
-									)}
+									)
+							) : (
+								<div className="disabled-tooltip inline-block" data-tooltip="You need to signup and be a part of the chapter to use this feature">
+									<Button
+										disabled
+										className="w-full sm:w-auto bg-neutral-400 cursor-not-allowed opacity-60"
+									>
+										<CheckCircle className="w-4 h-4 mr-2" />
+										I Can Help With This Request
+									</Button>
 								</div>
 							)}
+							</div>
+						)}
 							
 							{/* Admin actions */}
 							{isAdmin && isPending && (
@@ -605,35 +617,39 @@ export function PostDetailClient({
 									</p>
 								)}
 								
-								{/* Comment form */}
-								{isSignedIn && isVerified ? (
-									<form onSubmit={handleSubmitComment}>
-										<div className="flex gap-3">
-											<input
-												type="text"
-												placeholder="Write a comment..."
-												value={newComment}
-												onChange={(e) => setNewComment(e.target.value)}
-												className="flex-1 px-4 py-2.5 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
-											/>
-											<Button type="submit" disabled={isSubmitting || !newComment.trim()}>
-												{isSubmitting ? (
-													<Loader2 className="w-4 h-4 animate-spin" />
-												) : (
-													<Send className="w-4 h-4" />
-												)}
-											</Button>
-										</div>
-									</form>
-								) : isSignedIn ? (
-									<p className="text-center text-neutral-500 py-4 bg-neutral-50 rounded-xl">
-										Your account must be verified to comment.
-									</p>
-								) : (
-									<p className="text-center text-neutral-500 py-4 bg-neutral-50 rounded-xl">
-										<a href="/sign-in" className="text-primary-600 hover:underline">Sign in</a> to join the discussion.
-									</p>
-								)}
+							{/* Comment form */}
+							{isSignedIn && isVerified ? (
+								<form onSubmit={handleSubmitComment}>
+									<div className="flex gap-3">
+										<input
+											type="text"
+											placeholder="Write a comment..."
+											value={newComment}
+											onChange={(e) => setNewComment(e.target.value)}
+											className="flex-1 px-4 py-2.5 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
+										/>
+										<Button type="submit" disabled={isSubmitting || !newComment.trim()}>
+											{isSubmitting ? (
+												<Loader2 className="w-4 h-4 animate-spin" />
+											) : (
+												<Send className="w-4 h-4" />
+											)}
+										</Button>
+									</div>
+								</form>
+						) : (
+							<div className="disabled-tooltip flex gap-3" data-tooltip="You need to signup and be a part of the chapter to use this feature">
+								<input
+									type="text"
+									placeholder="Write a comment..."
+									disabled
+									className="flex-1 px-4 py-2.5 border border-neutral-300 rounded-xl bg-neutral-100 cursor-not-allowed opacity-60"
+								/>
+								<Button disabled className="cursor-not-allowed opacity-60">
+									<Send className="w-4 h-4" />
+								</Button>
+							</div>
+						)}
 							</div>
 						)}
 					</article>

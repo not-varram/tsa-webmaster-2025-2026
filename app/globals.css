@@ -207,4 +207,63 @@
       transform: translate(-10px, -10px);
     }
   }
+
+  /* Custom tooltip for disabled buttons */
+  .disabled-tooltip {
+    position: relative;
+  }
+
+  .disabled-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    padding: 8px 12px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    z-index: 50;
+  }
+
+  .disabled-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(0px);
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    z-index: 50;
+  }
+
+  .disabled-tooltip:hover::after,
+  .disabled-tooltip:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+  }
+
+  .disabled-tooltip:hover::before {
+    transform: translateX(-50%) translateY(0px);
+  }
+
+  /* Responsive tooltip positioning */
+  @media (max-width: 640px) {
+    .disabled-tooltip::after {
+      font-size: 0.8125rem;
+      padding: 6px 10px;
+      white-space: normal;
+      max-width: 200px;
+      text-align: center;
+    }
+  }
 }
