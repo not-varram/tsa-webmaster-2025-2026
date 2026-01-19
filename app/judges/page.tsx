@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { FileText, Code, CheckCircle, Users } from 'lucide-react';
+import { FileText, Code, CheckCircle, Users, Play } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
@@ -68,6 +68,106 @@ export default function JudgesPage() {
                                     </p>
                                 </div>
                             </div>
+                        </div>
+
+                        {/* Website Usage Tutorial */}
+                        <div className="bg-gradient-to-br from-primary-50 to-blue-50 rounded-xl p-8 shadow-sm border-2 border-primary-200">
+                            <div className="flex items-center gap-3 mb-4">
+                                <Play className="w-6 h-6 text-primary-600" />
+                                <h2 className="text-2xl font-bold text-neutral-900">Website Usage Tutorial</h2>
+                            </div>
+
+                            <p className="text-neutral-700 mb-6">
+                                This website is production-ready and serves sessions for two different types of user accounts: 
+                                <strong> Student Accounts</strong> (for the average TSA student member) and <strong>Advisor/Teacher Accounts</strong> (for chapter advisors).
+                            </p>
+
+                            <div className="bg-white rounded-lg p-6 mb-4">
+                                <h3 className="font-semibold text-neutral-900 mb-3">
+                                    Testing the Community Resource Hub Feature
+                                </h3>
+                                <p className="text-neutral-700 mb-4">
+                                    Follow these steps to experience one of our website's main features from both Student and Advisor perspectives:
+                                </p>
+
+                                <ol className="space-y-4 text-neutral-700">
+                                    <li className="flex gap-3">
+                                        <span className="font-bold text-primary-600 flex-shrink-0">1.</span>
+                                        <div>
+                                            <strong>Create a new student account.</strong> Click "Sign Up" in the top right corner of the navbar. 
+                                            Create an arbitrary name and password, but be sure to select <strong>"Lake Washington High School"</strong> for 
+                                            the TSA chapter the student is affiliated with, so that this new account can be linked to the existing 
+                                            advisor accounts granted by the website administrator. Make sure to note the email address and password 
+                                            that you chose for this new account.
+                                        </div>
+                                    </li>
+
+                                    <li className="flex gap-3">
+                                        <span className="font-bold text-primary-600 flex-shrink-0">2.</span>
+                                        <div>
+                                            <strong>Approve the student account as an advisor.</strong> The new student account needs to be approved 
+                                            by the advisor of their chapter for safety purposes. Sign in to the pre-existing advisor account using 
+                                            the following credentials by clicking on "Sign In" in the top right corner of the navbar:
+                                            <div className="mt-2 p-3 bg-neutral-50 rounded border border-neutral-200 font-mono text-sm">
+                                                <div>Email: <strong>admin@lwhs.edu</strong></div>
+                                                <div>Password: <strong>password123</strong></div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li className="flex gap-3">
+                                        <span className="font-bold text-primary-600 flex-shrink-0">3.</span>
+                                        <div>
+                                            <strong>Approve the pending student.</strong> Click the green "Approve" button to approve the new 
+                                            student account you created.
+                                        </div>
+                                    </li>
+
+                                    <li className="flex gap-3">
+                                        <span className="font-bold text-primary-600 flex-shrink-0">4.</span>
+                                        <div>
+                                            <strong>Sign in as the student.</strong> To experience the website from the perspective of the student, 
+                                            sign out of the advisor account (click the account profile dropdown on the top right corner of the navbar 
+                                            and select "Sign Out"), then sign into the newly approved student account using the credentials from step 1.
+                                        </div>
+                                    </li>
+
+                                    <li className="flex gap-3">
+                                        <span className="font-bold text-primary-600 flex-shrink-0">5.</span>
+                                        <div>
+                                            <strong>Create a resource post.</strong> As a student, you may now use one of the website's main features: 
+                                            the cross-chapter resource sharing/request forum. Head over to the "Resource Hub" page on the navbar and 
+                                            create a new post with arbitrary content in each of the fields to your liking.
+                                        </div>
+                                    </li>
+
+                                    <li className="flex gap-3">
+                                        <span className="font-bold text-primary-600 flex-shrink-0">6.</span>
+                                        <div>
+                                            <strong>Approve the post as an advisor.</strong> The post needs to be approved by the chapter advisor. 
+                                            Sign out of the student account and sign in to the advisor account. At the top of the advisor dashboard, 
+                                            you should see the pending post. Click the dropdown and approve the post.
+                                        </div>
+                                    </li>
+
+                                    <li className="flex gap-3">
+                                        <span className="font-bold text-primary-600 flex-shrink-0">7.</span>
+                                        <div>
+                                            <strong>View the public post.</strong> The resource request/offering is now public to all users! Any user 
+                                            can now fulfill the request or accept the offering to receive help or help out members from other TSA chapters. 
+                                            The post also contains a comments section for discussion purposes.
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+
+                            {/* <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <p className="text-sm text-neutral-700">
+                                    <strong className="text-neutral-900">Note:</strong> This tutorial demonstrates the moderated content workflow 
+                                    that ensures safety and quality across the platform. Both student posts and account registrations require 
+                                    advisor approval before becoming active in the community.
+                                </p>
+                            </div> */}
                         </div>
 
                         {/* Brief Compliance */}
