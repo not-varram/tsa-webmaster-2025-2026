@@ -34,7 +34,7 @@ export default function AboutPage() {
                             Many TSA chapters across Washington (ours included) operate with uneven access to outside resources and support. Some chapters lack funding or essential materials to support their students, while others have them in surplus without a way to share.
                             </p>
                             <p className="text-lg text-neutral-700 leading-relaxed">
-                            This imbalance makes it very difficult for new and existing chapters to operate smoothly and to provide the best experience for their members. We experienced this previously in the inaural year of the LWHS TSA chapter, where we struggled to find resources, funding, and mentorship to get started.
+                            This imbalance makes it very difficult for new and existing chapters to operate smoothly and to provide the best experience for their members. We experienced this previously in our chapter where we struggled to find resources, funding, and mentorship.
                             </p>
                         </div>
 
@@ -108,7 +108,7 @@ export default function AboutPage() {
                                             Connect with Chapters
                                         </h3>
                                         <p className="text-neutral-700">
-                                            Browse through active chapter profiles on the platform, find mentorship and communal resources & opportunities .
+                                            Browse through active chapter profiles on the platform, find mentorship and communal resources & opportunities.
                                         </p>
                                     </div>
                                 </div>

@@ -64,7 +64,7 @@ export default function JudgesPage() {
                                     <p>
                                         The WTSA Community Resource Hub creates a centralized platform where chapters can
                                         discover resources, connect with mentors, share their own materials, and learn
-                                        from each other's successes—embodying our theme of "Unity Through Community."
+                                        from each other's successes building on the theme of "Unity Through Community."
                                     </p>
                                 </div>
                             </div>
