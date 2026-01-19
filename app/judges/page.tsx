@@ -168,6 +168,19 @@ export default function JudgesPage() {
                                     advisor approval before becoming active in the community.
                                 </p>
                             </div> */}
+
+                            <div className="mt-6">
+                                <h3 className="font-semibold text-neutral-900 mb-4">Video Tutorial</h3>
+                                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                                    <iframe
+                                        className="absolute top-0 left-0 w-full h-full rounded-lg"
+                                        src="https://www.youtube.com/embed/xN50hKIzD00"
+                                        title="Website Usage Tutorial"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen
+                                    />
+                                </div>
+                            </div>
                         </div>
 
                         {/* Brief Compliance */}
