@@ -40,21 +40,12 @@ export default function CopyrightChecklistPage() {
             category: 'Images & Graphics',
             items: [
                 {
-                    name: 'TSA Logo Poster',
-                    type: 'PDF Document',
-                    source: 'Washington TSA / Technology Student Association',
-                    url: 'assets/tsa-logo-poster.pdf',
-                    license: 'Official TSA Materials',
-                    attribution: 'Provided by Washington TSA for competition use',
-                    original: false,
-                },
-                {
-                    name: 'WTSA Logo',
-                    type: 'Logo/Graphic',
-                    source: 'Student-designed for this project',
+                    name: 'Website Logo',
+                    type: 'Graphic',
+                    source: 'Student-designed via Adobe Illustrator',
                     url: 'N/A - CSS gradient design',
                     license: 'Original Work',
-                    attribution: 'Created by team using CSS gradients, no external images',
+                    attribution: 'Created by using Adobe Illustrator with gradients',
                     original: true,
                 },
             ],
@@ -122,30 +113,21 @@ export default function CopyrightChecklistPage() {
             category: 'Content',
             items: [
                 {
-                    name: 'All Website Copy',
-                    type: 'Text Content',
-                    source: 'Student-written',
-                    url: 'N/A',
-                    license: 'Original Work',
-                    attribution: 'All text content written by team members',
-                    original: true,
-                },
-                {
-                    name: 'Chapter Data (Names, Locations)',
+                    name: 'Sample Chapter Data (Names, Locations)',
                     type: 'Data',
-                    source: 'Fictional/Demo Data',
+                    source: 'Demo Data',
                     url: 'N/A',
                     license: 'Original Work',
-                    attribution: 'Washington high schools are real, but chapter details are fictional for demo purposes',
+                    attribution: 'Demo data regarding TSA chapters is entirely fictional for demonstration purposes',
                     original: true,
                 },
                 {
                     name: 'Resource Descriptions',
                     type: 'Content',
-                    source: 'Student-written',
+                    source: 'Demo Content',
                     url: 'N/A',
                     license: 'Original Work',
-                    attribution: 'All resource descriptions are original content',
+                    attribution: 'All resource descriptions are original content created for demo purposes',
                     original: true,
                 },
             ],
@@ -154,18 +136,18 @@ export default function CopyrightChecklistPage() {
             category: 'Code',
             items: [
                 {
-                    name: 'All Application Code',
+                    name: 'Codebase',
                     type: 'Source Code',
-                    source: 'Student-developed',
+                    source: 'Student developed',
                     url: 'N/A',
                     license: 'Original Work',
-                    attribution: 'All custom components, pages, API routes, and database schema written by team',
+                    attribution: 'All custom components, pages, API routes, and database schema written by us',
                     original: true,
                 },
                 {
                     name: 'Database Seed Data',
                     type: 'Data Script',
-                    source: 'Student-developed',
+                    source: 'Student developed',
                     url: 'N/A',
                     license: 'Original Work',
                     attribution: 'Custom seed script with demo data',
@@ -196,14 +178,9 @@ export default function CopyrightChecklistPage() {
                 <div className="container max-w-6xl">
                     <div className="bg-green-50 border-2 border-green-300 rounded-xl p-6 mb-12">
                         <div className="flex items-start gap-4">
-                            <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
                             <div>
-                                <h2 className="text-xl font-bold text-green-900 mb-2">
-                                    Copyright Compliance Confirmed
-                                </h2>
                                 <p className="text-green-800">
-                                    All external assets are properly licensed (MIT, Open Font License, Apache 2.0, or
-                                    official TSA materials). All original work created by students is clearly
+                                    All external assets are properly licensed (MIT, Open Font License, Apache 2.0). All original work created by us is clearly
                                     identified. No copyright violations exist in this project.
                                 </p>
                             </div>
@@ -320,35 +297,6 @@ export default function CopyrightChecklistPage() {
                                 </p>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Student Original Work Summary */}
-                    <div className="mt-12 bg-green-50 border-2 border-green-300 rounded-xl p-8">
-                        <h2 className="text-2xl font-bold text-neutral-900 mb-4">Student Original Work</h2>
-                        <p className="text-neutral-700 mb-6">
-                            The following components represent 100% original student work created specifically for
-                            this competition:
-                        </p>
-                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            {[
-                                'All React components and pages',
-                                'All API routes and server logic',
-                                'Complete database schema design',
-                                'All website copy and content',
-                                'Chapter profiles',
-                                'Resource descriptions',
-                                'Event information',
-                                'Layout and design system',
-                                'Color palette and branding',
-                                'Seed data and demo content',
-                                'Student Work Log documentation',
-                            ].map((item) => (
-                                <li key={item} className="flex items-start gap-2">
-                                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                                    <span className="text-neutral-700">{item}</span>
-                                </li>
-                            ))}
-                        </ul>
                     </div>
                 </div>
             </section>

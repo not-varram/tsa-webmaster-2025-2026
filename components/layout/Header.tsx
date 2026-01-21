@@ -12,7 +12,7 @@ const navigation = [
 	{ name: 'Chapters', href: '/chapters' },
 	{ name: 'Events', href: '/events' },
 	{ name: 'About', href: '/about' },
-	{ name: 'For Judges', href: '/judges' },
+	{ name: 'Reference & For Judges', href: '/judges' },
 ]
 
 type AuthUser = {

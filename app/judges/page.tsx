@@ -14,7 +14,7 @@ export default function JudgesPage() {
             {/* Header */}
             <section className="page-header-accent py-16 relative">
                 <div className="container relative z-10">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">For Competition Judges</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">Reference & For Competition Judges</h1>
                     <p className="text-xl text-neutral-600">
                         Technical documentation and compliance information for the 2025-2026 TSA Webmaster event
                     </p>
@@ -35,6 +35,13 @@ export default function JudgesPage() {
                             <Button variant="outline">
                                 <CheckCircle className="w-4 h-4 mr-2" />
                                 Copyright Checklist
+                            </Button>
+                        </Link>
+
+                        <Link href="https://drive.google.com/file/d/14g07aAAc7EBf2r5feGKrVW8CoWnZNl1v/view?usp=sharing">
+                            <Button variant="outline">
+                                <FileText className="w-4 h-4 mr-2" />
+                                Signed Copyright PDF
                             </Button>
                         </Link>
                     </div>
@@ -186,7 +193,7 @@ export default function JudgesPage() {
                         {/* Brief Compliance */}
                         <div className="bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
                             <h2 className="text-2xl font-bold text-neutral-900 mb-4">
-                                Competition Brief Compliance
+                                Competition Compliance
                             </h2>
                             <div className="space-y-4">
                                 <div className="flex items-start gap-4">
@@ -198,7 +205,7 @@ export default function JudgesPage() {
                                             Interactive Resource Directory
                                         </h3>
                                         <p className="text-neutral-700">
-                                            Full-featured search and filtering system on the{' '}
+                                            Functional search and filtering system on the{' '}
                                             <Link href="/resources" className="text-primary-600 hover:underline">
                                                 Resource Hub
                                             </Link>{' '}
@@ -220,12 +227,12 @@ export default function JudgesPage() {
                                             <Link href="/" className="text-primary-600 hover:underline">
                                                 home page
                                             </Link>
-                                            : Chapter Startup Toolkit, Leadership Workshop Series, and Fundraising Playbook.
+                                            : Chapter Startup Toolkit, Leadership Workshop Series, and Webmaster Startup Guide.
                                         </p>
                                     </div>
                                 </div>
 
-                                <div className="flex items-start gap-4">
+                                {/* <div className="flex items-start gap-4">
                                     <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                                         <CheckCircle className="w-5 h-5 text-green-600" />
                                     </div>
@@ -239,9 +246,9 @@ export default function JudgesPage() {
                                             allows anyone to contribute resources to the community.
                                         </p>
                                     </div>
-                                </div>
+                                </div> */}
 
-                                <div className="flex items-start gap-4">
+                                {/* <div className="flex items-start gap-4">
                                     <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                                         <CheckCircle className="w-5 h-5 text-green-600" />
                                     </div>
@@ -253,7 +260,7 @@ export default function JudgesPage() {
                                             requirements.
                                         </p>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 
@@ -301,158 +308,9 @@ export default function JudgesPage() {
                                         <li>• Production-ready build</li>
                                         <li>• Environment-based config</li>
                                         <li>• Database migrations</li>
-                                        <li>• Vercel/similar hosting ready</li>
+                                        <li>• Automatic deployment via Docker + CI/CD </li>
                                     </ul>
                                 </div>
-                            </div>
-                        </div>
-
-                        {/* Accessibility */}
-                        <div className="bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
-                            <h2 className="text-2xl font-bold text-neutral-900 mb-4">
-                                Accessibility & Responsive Design
-                            </h2>
-
-                            <div className="space-y-4">
-                                <div>
-                                    <h3 className="font-semibold text-neutral-900 mb-2">WCAG Compliance</h3>
-                                    <ul className="space-y-2 text-neutral-700">
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-green-600 mt-1">✓</span>
-                                            <span>Semantic HTML5 elements (header, nav, main, section, footer)</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-green-600 mt-1">✓</span>
-                                            <span>WCAG AA color contrast ratios throughout</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-green-600 mt-1">✓</span>
-                                            <span>Keyboard navigation support for all interactive elements</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-green-600 mt-1">✓</span>
-                                            <span>Focus indicators on buttons, links, and form inputs</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-green-600 mt-1">✓</span>
-                                            <span>Alt text for images and icons</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-green-600 mt-1">✓</span>
-                                            <span>ARIA labels where appropriate</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h3 className="font-semibold text-neutral-900 mb-2">Responsive Design</h3>
-                                    <ul className="space-y-2 text-neutral-700">
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-primary-600 mt-1">✓</span>
-                                            <span>Mobile-first approach (320px and up)</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-primary-600 mt-1">✓</span>
-                                            <span>Breakpoints: mobile (sm), tablet (md), desktop (lg, xl)</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-primary-600 mt-1">✓</span>
-                                            <span>Responsive navigation with hamburger menu</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-primary-600 mt-1">✓</span>
-                                            <span>Flexible grid layouts that adapt to screen size</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Testing */}
-                        <div className="bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
-                            <h2 className="text-2xl font-bold text-neutral-900 mb-4">Testing Strategy</h2>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <h3 className="font-semibold text-neutral-900 mb-3">Functional Testing</h3>
-                                    <ul className="space-y-2 text-neutral-700">
-                                        <li>• All navigation links verified</li>
-                                        <li>• Search and filtering tested</li>
-                                        <li>• Form validation working</li>
-                                        <li>• Database queries verified</li>
-                                        <li>• API endpoints tested</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h3 className="font-semibold text-neutral-900 mb-3">Cross-Browser Testing</h3>
-                                    <ul className="space-y-2 text-neutral-700">
-                                        <li>• Chrome (latest)</li>
-                                        <li>• Firefox (latest)</li>
-                                        <li>• Safari (latest)</li>
-                                        <li>• Edge (latest)</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h3 className="font-semibold text-neutral-900 mb-3">Performance</h3>
-                                    <ul className="space-y-2 text-neutral-700">
-                                        <li>• Lighthouse audits run</li>
-                                        <li>• Image optimization verified</li>
-                                        <li>• Load times measured</li>
-                                        <li>• Database query optimization</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h3 className="font-semibold text-neutral-900 mb-3">Accessibility</h3>
-                                    <ul className="space-y-2 text-neutral-700">
-                                        <li>• Keyboard navigation tested</li>
-                                        <li>• Color contrast checked</li>
-                                        <li>• Automated accessibility scans</li>
-                                        <li>• Screen reader compatibility</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Required Documentation */}
-                        <div className="bg-primary-50 border-2 border-primary-300 rounded-xl p-8">
-                            <div className="flex items-center gap-3 mb-4">
-                                <FileText className="w-6 h-6 text-primary-600" />
-                                <h2 className="text-2xl font-bold text-neutral-900">Required Documentation</h2>
-                            </div>
-
-                            <p className="text-neutral-700 mb-6">
-                                As required by the Webmaster competition, we've provided comprehensive documentation:
-                            </p>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {/* <Link
-                                    href="/student-work-log"
-                                    className="block p-6 bg-white rounded-lg border-2 border-primary-200 hover:border-primary-400 hover:shadow-md transition-all"
-                                >
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <FileText className="w-5 h-5 text-primary-600" />
-                                        <h3 className="font-semibold text-neutral-900">Student Work Log</h3>
-                                    </div>
-                                    <p className="text-sm text-neutral-600">
-                                        Detailed timeline of tasks, team responsibilities, and development process
-                                    </p>
-                                </Link> */}
-
-                                <Link
-                                    href="/copyright-checklist"
-                                    className="block p-6 bg-white rounded-lg border-2 border-primary-200 hover:border-primary-400 hover:shadow-md transition-all"
-                                >
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <CheckCircle className="w-5 h-5 text-primary-600" />
-                                        <h3 className="font-semibold text-neutral-900">Copyright Checklist</h3>
-                                    </div>
-                                    <p className="text-sm text-neutral-600">
-                                        Complete list of assets, sources, licenses, and attributions
-                                    </p>
-                                </Link>
                             </div>
                         </div>
                     </div>
