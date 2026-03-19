@@ -3,6 +3,8 @@ import prisma from '@/lib/db'
 import { getSession, isChapterAdmin } from '@/lib/auth'
 import { UserRole } from '@prisma/client'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
 	try {
 		const session = await getSession()
