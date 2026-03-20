@@ -22,7 +22,7 @@ type Resource = {
     } | null;
 };
 
-const RESOURCE_TYPES = ['TEMPLATE', 'VIDEO', 'WORKSHOP', 'GUIDE', 'TOOL', 'EVENT', 'SERVICE'];
+const RESOURCE_TYPES = ['TEMPLATE', 'VIDEO', 'WORKSHOP', 'GUIDE'];
 const CATEGORIES = ['Leadership', 'Competition Prep', 'Operations', 'Marketing', 'Community Service'];
 const AUDIENCES = ['Students', 'Advisors', 'Chapter Officers', 'New Chapters'];
 

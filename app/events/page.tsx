@@ -28,8 +28,7 @@ export default async function EventsPage() {
                             <h1 className="text-4xl md:text-5xl font-bold text-neutral-900">Events & Programs</h1>
                         </div>
                         <p className="text-xl text-neutral-600">
-                            Workshops, competitions, training sessions, and community events designed to support
-                            your TSA journey and strengthen chapter connections.
+                            Workshops, competitions, meetups, and community events hosted between TSA chapters across Washington.
                         </p>
                     </div>
                 </div>

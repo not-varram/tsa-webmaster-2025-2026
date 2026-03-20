@@ -45,8 +45,7 @@ export default async function ResourcesPage() {
                     <div className="max-w-3xl">
                         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">Resource Hub</h1>
                         <p className="text-xl text-neutral-600">
-                            Discover tools, templates, guides, and workshops created by WTSA and shared by
-                            chapters across Washington. Request resources you need or share what you have with the community.
+                            Find physical materials, tools, templates, and tutorials shared by TSA Chapters around the state and WTSA Official. Request resources you need or share what you have with the community.
                         </p>
                     </div>
                 </div>
@@ -63,11 +62,15 @@ export default async function ResourcesPage() {
                 </div>
             </section>
 
+            {/* gradient divider */}
+            <div className="bg-gradient-to-r from-primary-500 to-secondary-500 py-7">
+            </div>
+
             {/* Official Resources */}
             <section className="section">
                 <div className="container">
                     <div className="mb-8">
-                        <h2 className="text-2xl font-bold text-neutral-900">Official Resources</h2>
+                        <h2 className="text-2xl font-bold text-neutral-900">Tutorials, Guides, And Official Resources</h2>
                         <p className="text-neutral-600 mt-1">
                             Curated resources from WTSA and chapters across Washington
                         </p>

@@ -15,7 +15,7 @@ export default function AboutPage() {
                     <div className="max-w-4xl mx-auto text-center">
                         <h1 className="text-4xl md:text-6xl font-bold mb-6 text-neutral-900">About WTSA Coalesce</h1>
                         <p className="text-2xl text-neutral-600">
-                            Building Unity Through Community across Washington TSA
+                            Unity Through Community across Washington TSA Chapters
                         </p>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ export default function JudgesPage() {
                 <div className="container relative z-10">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">Reference & For Competition Judges</h1>
                     <p className="text-xl text-neutral-600">
-                        Technical documentation and compliance information for the 2025-2026 TSA Webmaster event
+                        Technical documentation and compliance information for 2025-2026 Webmaster
                     </p>
                 </div>
             </section>
@@ -61,17 +61,18 @@ export default function JudgesPage() {
                                 <div>
                                     <h3 className="font-semibold text-neutral-900 mb-2">The Problem</h3>
                                     <p>
-                                        Many Washington TSA chapters operate in isolation, particularly new or
-                                        geographically distant ones. They lack easy access to resources, mentorship, and
-                                        collaboration opportunities that could strengthen their programs.
+                                        Many Washington TSA chapters operate with very little help, particularly new or
+                                        geographically remote ones. They lack easy access to resources and
+                                        collaboration opportunities that could improve their programs. We've seen this
+                                        issue firsthand in the inaugural year of our chapter, where we struggled to find materials, funding, and external help.
                                     </p>
                                 </div>
                                 <div>
                                     <h3 className="font-semibold text-neutral-900 mb-2">Our Solution</h3>
                                     <p>
-                                        The WTSA Community Resource Hub creates a centralized platform where chapters can
-                                        discover resources, connect with mentors, share their own materials, and learn
-                                        from each other's successes building on the theme of "Unity Through Community."
+                                        The WTSA Community Resource Hub creates a centralized, systemic platform where chapters can
+                                        find resources, connect with others, share their own materials, and learn
+                                        from each other's successes building on the 2026 theme of "Unity Through Community."
                                     </p>
                                 </div>
                             </div>
@@ -190,80 +191,7 @@ export default function JudgesPage() {
                             </div>
                         </div>
 
-                        {/* Brief Compliance */}
-                        <div className="bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
-                            <h2 className="text-2xl font-bold text-neutral-900 mb-4">
-                                Competition Compliance
-                            </h2>
-                            <div className="space-y-4">
-                                <div className="flex items-start gap-4">
-                                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                        <CheckCircle className="w-5 h-5 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-neutral-900 mb-1">
-                                            Interactive Resource Directory
-                                        </h3>
-                                        <p className="text-neutral-700">
-                                            Functional search and filtering system on the{' '}
-                                            <Link href="/resources" className="text-primary-600 hover:underline">
-                                                Resource Hub
-                                            </Link>{' '}
-                                            page with filters for type, category, and audience.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                        <CheckCircle className="w-5 h-5 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-neutral-900 mb-1">
-                                            Highlighted Resources (3+)
-                                        </h3>
-                                        <p className="text-neutral-700">
-                                            Three key resources highlighted on the{' '}
-                                            <Link href="/" className="text-primary-600 hover:underline">
-                                                home page
-                                            </Link>
-                                            : Chapter Startup Toolkit, Leadership Workshop Series, and Webmaster Startup Guide.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {/* <div className="flex items-start gap-4">
-                                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                        <CheckCircle className="w-5 h-5 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-neutral-900 mb-1">Resource Suggestion Form</h3>
-                                        <p className="text-neutral-700">
-                                            Public form on the{' '}
-                                            <Link href="/suggest" className="text-primary-600 hover:underline">
-                                                Suggest page
-                                            </Link>{' '}
-                                            allows anyone to contribute resources to the community.
-                                        </p>
-                                    </div>
-                                </div> */}
-
-                                {/* <div className="flex items-start gap-4">
-                                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                        <CheckCircle className="w-5 h-5 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-neutral-900 mb-1">Additional Content</h3>
-                                        <p className="text-neutral-700">
-                                            Chapter directory with profiles, Events calendar, and
-                                            Mentor/Mentee program tracking—all adding substantial value beyond basic
-                                            requirements.
-                                        </p>
-                                    </div>
-                                </div> */}
-                            </div>
-                        </div>
-
+                        
                         {/* Technology Stack */}
                         <div className="bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
                             <div className="flex items-center gap-3 mb-4">
@@ -278,7 +206,7 @@ export default function JudgesPage() {
                                         <li>• Next.js 14 (React framework)</li>
                                         <li>• TypeScript (type-safe development)</li>
                                         <li>• Tailwind CSS (styling)</li>
-                                        <li>• Server & Client Components</li>
+                                        <li>• Various Open Source UI Libraries</li>
                                     </ul>
                                 </div>
 
@@ -293,22 +221,12 @@ export default function JudgesPage() {
                                 </div>
 
                                 <div>
-                                    <h3 className="font-semibold text-neutral-900 mb-3">Performance</h3>
-                                    <ul className="space-y-2 text-neutral-700">
-                                        <li>• Static generation where possible</li>
-                                        <li>• Incremental static regeneration</li>
-                                        <li>• Optimized images and assets</li>
-                                        <li>• Database indexing</li>
-                                    </ul>
-                                </div>
-
-                                <div>
                                     <h3 className="font-semibold text-neutral-900 mb-3">Deployment</h3>
                                     <ul className="space-y-2 text-neutral-700">
-                                        <li>• Production-ready build</li>
-                                        <li>• Environment-based config</li>
-                                        <li>• Database migrations</li>
-                                        <li>• Automatic deployment via Docker + CI/CD </li>
+                                        <li>• Complete CI/CD Pipeline</li>
+                                        <li>• Dockerized Building</li>
+                                        <li>• Github Containers</li>
+                                        <li>• Docker Watchtower</li>
                                     </ul>
                                 </div>
                             </div>

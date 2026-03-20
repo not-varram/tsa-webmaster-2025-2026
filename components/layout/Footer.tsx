@@ -30,7 +30,7 @@ export function Footer() {
                             </span>
                         </div>
                         <p className="text-neutral-400 text-sm leading-relaxed">
-                            Unity Through Community: Connecting Washington TSA chapters through shared resources.
+                            Connecting WA TSA chapters through shared resources.
                         </p>
                     </div>
 
@@ -66,10 +66,10 @@ export function Footer() {
                             </p>
                             <div className="pt-4">
                                 <p className="text-xs text-neutral-500">
-                                    Copyright {new Date().getFullYear()} Washington TSA & LWHS Developers.
+                                    Copyright {new Date().getFullYear()} LWHS TSA Developers.
                                 </p>
                                 <p className="text-xs text-neutral-500 mt-1">
-                                    Built for the 2025-2026 TSA Webmaster Competition
+                                    Built for the 2025-2026 Webmaster
                                 </p>
                             </div>
                         </div>

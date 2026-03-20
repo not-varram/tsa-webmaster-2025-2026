@@ -55,10 +55,10 @@ export default async function HomePage() {
                 <div className="container">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
-                            Highlighted Resources
+                            Highlighted Resources & Guides
                         </h2>
                         <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-                            Essential official and chapter resources for you
+                            Official WTSA and chapter resources for you
                         </p>
                     </div>
 
@@ -86,8 +86,8 @@ export default async function HomePage() {
                         <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
                             Explore the Resource Directory
                         </h2>
-                        <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-                            Search and filter resources shared by official WTSA and our chapters
+                        <p className="text-lg text-neutral-600 max-w-2.2xl mx-auto">
+                            Search and filter all materials & resources shared by official WTSA and our chapters
                         </p>
                     </div>
 
@@ -112,49 +112,7 @@ export default async function HomePage() {
                 </div>
             </section>
 
-            {/* Chapter Connection Section */}
-            <section className="section">
-                <div className="container">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
-                                Connect with Chapters Across Washington
-                            </h2>
-                            <p className="text-lg text-neutral-600 mb-6">
-                                Find chapters near you, ask questions, and share what works.
-                            </p>
-                            <ul className="space-y-3 mb-8">
-                                {[
-                                    'Find chapters in your region',
             
-                                    'Share your chapter\'s resources',
-                                ].map((item) => (
-                                    <li key={item} className="flex items-start gap-3">
-                                        <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                                            <svg className="w-4 h-4 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-neutral-700">{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                            <Link href="/chapters">
-                                <Button size="lg">
-                                    See Chapters
-                                    <ArrowRight className="ml-2 w-4 h-4" />
-                                </Button>
-                            </Link>
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {chapters.map((chapter) => (
-                                <ChapterCard key={chapter.id} chapter={chapter} />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     );
 }

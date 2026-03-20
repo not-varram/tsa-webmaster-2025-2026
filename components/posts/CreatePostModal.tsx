@@ -239,8 +239,7 @@ export function CreatePostModal({ isOpen, onClose, onSuccess, isAdmin = false }:
 						</div>
 					) : (
 						<div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
-							<strong>Note:</strong> Your post will be reviewed by an admin before appearing publicly.
-							You&apos;ll be notified once it&apos;s approved.
+							<strong>Note:</strong> Your post will be reviewed by your chapter admin before appearing publicly.
 						</div>
 					)}
 					

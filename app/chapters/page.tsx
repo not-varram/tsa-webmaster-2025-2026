@@ -30,9 +30,9 @@ export default async function ChaptersPage() {
             <section className="page-header-accent py-16 relative">
                 <div className="container relative z-10">
                     <div className="max-w-3xl">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">WTSA Chapters</h1>
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">Registered WTSA Chapters</h1>
                         <p className="text-xl text-neutral-600">
-                            Connect with TSA chapters across Washington.
+                            Chapters that are registered with WTSA Coalesce
                         </p>
                     </div>
                 </div>
@@ -40,18 +40,10 @@ export default async function ChaptersPage() {
 
             {/* Chapter Stat Cards */}
             <section className="section">
-                <div className="container">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-neutral-200">
-                            <div className="text-4xl font-bold text-primary-600 mb-2">{chapters.length}</div>
-                            <div className="text-neutral-600">Active Chapters</div>
-                        </div>
-                        <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-neutral-200">
-                            <div className="text-4xl font-bold text-primary-600 mb-2">
-                                {Object.keys(chaptersByRegion).length}
-                            </div>
-                            <div className="text-neutral-600">Regions</div>
-                        </div>
+                <div className="w-full px-4 sm:px-6 lg:px-8">
+                    <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-primary-200 max-w-2xl mx-auto">
+                        <div className="text-4xl font-bold text-primary-600 mb-2">{chapters.length}</div>
+                        <div className="text-neutral-600">Active Chapters</div>
                     </div>
 
                     {/* Chapters by Region */}

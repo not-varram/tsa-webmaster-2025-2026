@@ -57,6 +57,7 @@ export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }
 	const [categoryFilter, setCategoryFilter] = useState('')
 	const [statusFilter, setStatusFilter] = useState<'APPROVED' | 'FILLED'>('APPROVED')
 	const [verified, setVerified] = useState(isVerified)
+	const [pendingCount, setPendingCount] = useState(0)
 
 	const refreshVerification = useCallback(async () => {
 		if (!isSignedIn) {
@@ -87,6 +88,12 @@ export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }
 			const res = await fetch(`/api/posts?${params.toString()}`)
 			const data = await res.json()
 			setPosts(data.posts || [])
+
+			// Fetch pending count for stats
+			const pendingRes = await fetch('/api/posts?status=PENDING')
+			const pendingData = await pendingRes.json()
+			setPendingCount((pendingData.posts || []).length)
+			
 		} catch (error) {
 			console.error('Failed to fetch posts:', error)
 		} finally {
@@ -167,7 +174,7 @@ export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }
 			
 			{/* Stats cards - only for active posts */}
 			{statusFilter === 'APPROVED' && (
-				<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+				<div className="grid grid-cols-2 md:grid-cols-3 gap-4">
 					<div className="bg-white rounded-xl border border-neutral-200 p-4">
 						<div className="flex items-center gap-3">
 							<div className="p-2 bg-amber-100 rounded-lg">
@@ -187,6 +194,17 @@ export function CommunityPostsClient({ isSignedIn, isVerified, isAdmin = false }
 							<div>
 								<div className="text-2xl font-bold text-neutral-900">{offeringCount}</div>
 								<div className="text-xs text-neutral-500">Available Offerings</div>
+							</div>
+						</div>
+					</div>
+					<div className="bg-white rounded-xl border border-neutral-200 p-4">
+						<div className="flex items-center gap-3">
+							<div className="p-2 bg-blue-100 rounded-lg">
+								<History className="w-5 h-5 text-blue-700" />
+							</div>
+							<div>
+								<div className="text-2xl font-bold text-neutral-900">{pendingCount}</div>
+								<div className="text-xs text-neutral-500">Pending Approval</div>
 							</div>
 						</div>
 					</div>
