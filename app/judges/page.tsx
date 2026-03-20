@@ -16,7 +16,7 @@ export default function JudgesPage() {
                 <div className="container relative z-10">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">Reference & For Competition Judges</h1>
                     <p className="text-xl text-neutral-600">
-                        Technical documentation and compliance information for 2025-2026 Webmaster
+                        Technical documentation and compliance information for Webmaster 2025-2026
                     </p>
                 </div>
             </section>
@@ -25,11 +25,11 @@ export default function JudgesPage() {
             <section className="bg-white border-b border-neutral-200 py-6">
                 <div className="container">
                     <div className="flex flex-wrap gap-4">
-                        <Link href="/student-work-log">
-                            {/* <Button variant="outline">
+                        <Link href="https://drive.google.com/file/d/1fWjwFa7nY2qUJgCGLG5dzotLxmejFqpd/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                            <Button variant="outline">
                                 <FileText className="w-4 h-4 mr-2" />
-                                Student Work Log
-                            </Button> */}
+                                Work Log
+                            </Button>
                         </Link>
                         <Link href="/copyright-checklist">
                             <Button variant="outline">
@@ -38,7 +38,7 @@ export default function JudgesPage() {
                             </Button>
                         </Link>
 
-                        <Link href="https://drive.google.com/file/d/14g07aAAc7EBf2r5feGKrVW8CoWnZNl1v/view?usp=sharing">
+                        <Link href="https://drive.google.com/file/d/14g07aAAc7EBf2r5feGKrVW8CoWnZNl1v/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                             <Button variant="outline">
                                 <FileText className="w-4 h-4 mr-2" />
                                 Signed Copyright PDF

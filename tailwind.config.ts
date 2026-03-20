@@ -48,7 +48,7 @@ const config: Config = {
                 }
             },
             fontFamily: {
-                sans: ['Inter', 'system-ui', 'sans-serif'],
+                sans: ['"Google Sans"', 'system-ui', 'sans-serif'],
             },
             animation: {
                 'cursor-blink': 'cursor-blink 1s step-end infinite',

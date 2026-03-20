@@ -12,10 +12,10 @@ export default function CopyrightChecklistPage() {
             category: 'Fonts',
             items: [
                 {
-                    name: 'Inter',
+                    name: 'Google Sans',
                     type: 'Font',
                     source: 'Google Fonts',
-                    url: 'https://fonts.google.com/specimen/Inter',
+                    url: 'https://fonts.google.com/specimen/Google+Sans',
                     license: 'Open Font License',
                     attribution: 'Used via Google Fonts CDN',
                     original: false,

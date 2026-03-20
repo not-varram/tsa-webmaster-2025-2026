@@ -108,7 +108,7 @@ export default function AboutPage() {
                                             Connect with Chapters
                                         </h3>
                                         <p className="text-neutral-700">
-                                            Browse through active chapter profiles on the platform, find mentorship and communal resources & opportunities.
+                                            Browse through active chapter profiles on the platform and find communal resources & opportunities.
                                         </p>
                                     </div>
                                 </div>
